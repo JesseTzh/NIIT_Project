@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>临时主页</title>
+    {css href="https://cdn.bootcss.com/bootswatch/4.1.3/sketchy/bootstrap.min.css" /}
+    {css href="/static/css/index.css" /}
+    {js href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.js" /}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">临时入口</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Test1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Test2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Test3</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Test4</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1 id="title">客户关系管理系统</h1>
+    <div id="markdown" class="jumbotron"> </div>
+    <script src="/static/js/Parser.js"></script>
+
+    <script>
+        var parser = new HyperDown,
+            html = parser.makeHtml(
+                "## 人事管理\n" +
+                "### 登陆模块\n" +
+                "* 登陆验证\n" +
+                "* 登陆限制：连续三次输入错误密码，30秒内禁止登陆\n" +
+                "* 注销功能\n" +
+                "### 员工管理\n" +
+                "* 员工编号：【EMNNNNN】\tNNNNN代表5位数字序列\n" +
+                "* 员工姓名\n" +
+                "* 登陆密码\n" +
+                "* 员工头像\n" +
+                "* 所属角色\n" +
+                "* 所属部门\n" +
+                "* 最近登陆时间、IP、所用浏览器\n" +
+                "### 部门管理\n" +
+                "* 部门编号\n" +
+                "* 部门名称\n" +
+                "* 部门所售产品类型\n" +
+                "### 角色管理\n" +
+                "* 角色名称\n" +
+                "    * 系统管理员\n" +
+                "    * 部门经理\n" +
+                "    * 销售人员\n" +
+                "    * 售后人员\n" +
+                "* 角色权限管理\n" +
+                "    * 销售人员、售后人员可查看自己的数据\n" +
+                "    * 部门经理可查看自己部门的所有数据、员工信息\n" +
+                "* 系统管理员：拥有任何权限\n" +
+                "* 可选：员工可自定义角色和权限\n" +
+                "## 产品管理\n" +
+                "### 产品分类\n" +
+                "* 九大分类展示\n" +
+                "* 显示某一产品的详细信息\n" +
+                "### 产品管理\n" +
+                "* 产品编号：【PDYYYYNNNNN】YYYY表⽰产品数据形成的年份，NNNNN代表5位数字序列\n" +
+                "* 产品名称\n" +
+                "* 产品图片\n" +
+                "* 产品分类\n" +
+                "* 产品成本价\n" +
+                "* 产品销售价\n" +
+                "* 计量单位\n" +
+                "* 规格\n" +
+                "* 概要: 支持批量导入，并提供Excel模板\n" +
+                "## 销售管理\n" +
+                "### 客户管理\n" +
+                "* 客户编号：【CTTTNNNNN】TT为客户类型，01为单位客户，02为个⼈（家庭）客户， NNNNN为5位数字序列\n" +
+                "* 客户名称\n" +
+                "* 客户联系方式\n" +
+                "* 客户地址\n" +
+                "* 客户等级\n" +
+                "    * 普通客户\n" +
+                "    * VIP客户\n" +
+                "* 客户分类\n" +
+                "    * 单位客户\n" +
+                "    * 个人客户\n" +
+                "### 订单管理\n" +
+                "* 订单编号：【ODYYYYMMNNNNN】YYYY为订单⽣成的年份，MM为订单⽣成的⽉份，NNNNN代 表5位数字序列\n" +
+                "* 产品编号\n" +
+                "* 客户编号\n" +
+                "* 购买日期\n" +
+                "* 购买途径\n" +
+                "    * 官方商城\n" +
+                "    * 电商自营店\n" +
+                "    * 电商加盟店\n" +
+                "    * 自营实体店\n" +
+                "    * 加盟实体店\n" +
+                "    * 分销商\n" +
+                "* 数量\n" +
+                "* 单价\n" +
+                "* 销售人员编号\n" +
+                "* 自动计算总价\n" +
+                "* 概要: 支持批量导入以及单条维护\n" +
+                "## 售后管理\n" +
+                "### 售后受理\n" +
+                "* 售后服务单号：【SVYYYYMMNNNNN】YYYY为订单⽣成的年份，MM为订单⽣成的⽉份，NNNNN代 表5位数字序列\n" +
+                "* 订单编号\n" +
+                "* 问题分类\n" +
+                "* 问题详情\n" +
+                "* 售后人员\n" +
+                "* 受理日期\n" +
+                "* 服务单状态：初始状态【办理中】\n" +
+                "### 售后反馈\n" +
+                "* 服务反馈单号：【FDYYYYMMNNNNN】YYYY为订单⽣成的年份，MM为订单⽣成的⽉份，NNNNN代 表5位数字序列\n" +
+                "* 售后服务单编号\n" +
+                "* 售后人员\n" +
+                "* 反馈日期\n" +
+                "* 处理类型\n" +
+                "    * 退货\n" +
+                "        * 订单日期7日内\n" +
+                "    * 换货\n" +
+                "        * 订单日期30日内\n" +
+                "    * 维修和服务\n" +
+                "        * 订单日期一年内免费维修\n" +
+                "* 费用\n" +
+                "* 处理情况说明\n" +
+                "* 服务单状态：【办结】\n" +
+                "## 统计分析\n" +
+                "### 销售业绩\n" +
+                "* 详细内容\n" +
+                "    * 员工编号\n" +
+                "    * 员工姓名\n" +
+                "    * 产品类别\n" +
+                "    * 销售总额\n" +
+                "    * 日期\n" +
+                "    * 概要: 以表格形式展现，支持自定义筛选、排序\n" +
+                "* 背景排名\n" +
+                "    * 前三名：红色\n" +
+                "    * 四到十名：浅绿色\n" +
+                "    * 十一到二十名：橙色\n" +
+                "    * 二十名之后：浅红色\n" +
+                "### 售后业绩\n" +
+                "* 按照售后服务类型形成饼图，直观查 看退货、换货等处理方式数据统计。\n" +
+                "### 报表统计\n" +
+                "* 统计销量前五名和最后五名\n" +
+                "* 统计质量问题前五名和最后五名\n" +
+                "* 根据产品类别/产品、购买途径和日期范围（月度，季度，年 度，指定区间）查看整体销售情况，显示合计数量及销售金额\t\n" +
+                "* 预测销售趋势\n" +
+                "\n" +
+                "*XMind: ZEN - Trial Version*");
+        markdown.innerHTML = html;
+    </script>
+</body>
+</html>
