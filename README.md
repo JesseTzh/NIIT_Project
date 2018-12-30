@@ -1,133 +1,121 @@
-ThinkPHP 5.0
-===============
+NIIT 2019年秋季学期项目
 
-[![Total Downloads](https://poser.pugx.org/topthink/think/downloads)](https://packagist.org/packages/topthink/think)
-[![Latest Stable Version](https://poser.pugx.org/topthink/think/v/stable)](https://packagist.org/packages/topthink/think)
-[![Latest Unstable Version](https://poser.pugx.org/topthink/think/v/unstable)](https://packagist.org/packages/topthink/think)
-[![License](https://poser.pugx.org/topthink/think/license)](https://packagist.org/packages/topthink/think)
+# 客户关系管理系统
+## 人事管理
+### 登陆模块
+* 登陆验证
+* 登陆限制：连续三次输入错误密码，30秒内禁止登陆
+* 注销功能
+### 员工管理
+* 员工编号：【EMNNNNN】	NNNNN代表5位数字序列
+* 员工姓名
+* 登陆密码
+* 员工头像
+* 所属角色
+* 所属部门
+* 最近登陆时间、IP、所用浏览器
+### 部门管理
+* 部门编号
+* 部门名称
+* 部门所售产品类型
+### 角色管理
+* 角色名称
+    * 系统管理员
+    * 部门经理
+    * 销售人员
+    * 售后人员
+* 角色权限管理
+    * 销售人员、售后人员可查看自己的数据
+    * 部门经理可查看自己部门的所有数据、员工信息
+* 系统管理员：拥有任何权限
+* 可选：员工可自定义角色和权限
+## 产品管理
+### 产品分类
+* 九大分类展示
+* 显示某一产品的详细信息
+### 产品管理
+* 产品编号：【PDYYYYNNNNN】YYYY表⽰产品数据形成的年份，NNNNN代表5位数字序列
+* 产品名称
+* 产品图片
+* 产品分类
+* 产品成本价
+* 产品销售价
+* 计量单位
+* 规格
+* 概要: 支持批量导入，并提供Excel模板
+## 销售管理
+### 客户管理
+* 客户编号：【CTTTNNNNN】TT为客户类型，01为单位客户，02为个⼈（家庭）客户， NNNNN为5位数字序列
+* 客户名称
+* 客户联系方式
+* 客户地址
+* 客户等级
+    * 普通客户
+    * VIP客户
+* 客户分类
+    * 单位客户
+    * 个人客户
+### 订单管理
+* 订单编号：【ODYYYYMMNNNNN】YYYY为订单⽣成的年份，MM为订单⽣成的⽉份，NNNNN代 表5位数字序列
+* 产品编号
+* 客户编号
+* 购买日期
+* 购买途径
+    * 官方商城
+    * 电商自营店
+    * 电商加盟店
+    * 自营实体店
+    * 加盟实体店
+    * 分销商
+* 数量
+* 单价
+* 销售人员编号
+* 自动计算总价
+* 概要: 支持批量导入以及单条维护
+## 售后管理
+### 售后受理
+* 售后服务单号：【SVYYYYMMNNNNN】YYYY为订单⽣成的年份，MM为订单⽣成的⽉份，NNNNN代 表5位数字序列
+* 订单编号
+* 问题分类
+* 问题详情
+* 售后人员
+* 受理日期
+* 服务单状态：初始状态【办理中】
+### 售后反馈
+* 服务反馈单号：【FDYYYYMMNNNNN】YYYY为订单⽣成的年份，MM为订单⽣成的⽉份，NNNNN代 表5位数字序列
+* 售后服务单编号
+* 售后人员
+* 反馈日期
+* 处理类型
+    * 退货
+        * 订单日期7日内
+    * 换货
+        * 订单日期30日内
+    * 维修和服务
+        * 订单日期一年内免费维修
+* 费用
+* 处理情况说明
+* 服务单状态：【办结】
+## 统计分析
+### 销售业绩
+* 详细内容
+    * 员工编号
+    * 员工姓名
+    * 产品类别
+    * 销售总额
+    * 日期
+    * 概要: 以表格形式展现，支持自定义筛选、排序
+* 背景排名
+    * 前三名：红色
+    * 四到十名：浅绿色
+    * 十一到二十名：橙色
+    * 二十名之后：浅红色
+### 售后业绩
+* 按照售后服务类型形成饼图，直观查 看退货、换货等处理方式数据统计。
+### 报表统计
+* 统计销量前五名和最后五名
+* 统计质量问题前五名和最后五名
+* 根据产品类别/产品、购买途径和日期范围（月度，季度，年 度，指定区间）查看整体销售情况，显示合计数量及销售金额	
+* 预测销售趋势
 
-ThinkPHP5在保持快速开发和大道至简的核心理念不变的同时，PHP版本要求提升到5.4，对已有的CBD模式做了更深的强化，优化核心，减少依赖，基于全新的架构思想和命名空间实现，是ThinkPHP突破原有框架思路的颠覆之作，其主要特性包括：
-
- + 基于命名空间和众多PHP新特性
- + 核心功能组件化
- + 强化路由功能
- + 更灵活的控制器
- + 重构的模型和数据库类
- + 配置文件可分离
- + 重写的自动验证和完成
- + 简化扩展机制
- + API支持完善
- + 改进的Log类
- + 命令行访问支持
- + REST支持
- + 引导文件支持
- + 方便的自动生成定义
- + 真正惰性加载
- + 分布式环境支持
- + 更多的社交类库
-
-> ThinkPHP5的运行环境要求PHP5.4以上。
-
-详细开发文档参考 [ThinkPHP5完全开发手册](http://www.kancloud.cn/manual/thinkphp5)
-
-## 目录结构
-
-初始的目录结构如下：
-
-~~~
-www  WEB部署目录（或者子目录）
-├─application           应用目录
-│  ├─common             公共模块目录（可以更改）
-│  ├─module_name        模块目录
-│  │  ├─config.php      模块配置文件
-│  │  ├─common.php      模块函数文件
-│  │  ├─controller      控制器目录
-│  │  ├─model           模型目录
-│  │  ├─view            视图目录
-│  │  └─ ...            更多类库目录
-│  │
-│  ├─command.php        命令行工具配置文件
-│  ├─common.php         公共函数文件
-│  ├─config.php         公共配置文件
-│  ├─route.php          路由配置文件
-│  ├─tags.php           应用行为扩展定义文件
-│  └─database.php       数据库配置文件
-│
-├─public                WEB目录（对外访问目录）
-│  ├─index.php          入口文件
-│  ├─router.php         快速测试文件
-│  └─.htaccess          用于apache的重写
-│
-├─thinkphp              框架系统目录
-│  ├─lang               语言文件目录
-│  ├─library            框架类库目录
-│  │  ├─think           Think类库包目录
-│  │  └─traits          系统Trait目录
-│  │
-│  ├─tpl                系统模板目录
-│  ├─base.php           基础定义文件
-│  ├─console.php        控制台入口文件
-│  ├─convention.php     框架惯例配置文件
-│  ├─helper.php         助手函数文件
-│  ├─phpunit.xml        phpunit配置文件
-│  └─start.php          框架入口文件
-│
-├─extend                扩展类库目录
-├─runtime               应用的运行时目录（可写，可定制）
-├─vendor                第三方类库目录（Composer依赖库）
-├─build.php             自动生成定义文件（参考）
-├─composer.json         composer 定义文件
-├─LICENSE.txt           授权说明文件
-├─README.md             README 文件
-├─think                 命令行入口文件
-~~~
-
-> router.php用于php自带webserver支持，可用于快速测试
-> 切换到public目录后，启动命令：php -S localhost:8888  router.php
-> 上面的目录结构和名称是可以改变的，这取决于你的入口文件和配置参数。
-
-## 命名规范
-
-`ThinkPHP5`遵循PSR-2命名规范和PSR-4自动加载规范，并且注意如下规范：
-
-### 目录和文件
-
-*   目录不强制规范，驼峰和小写+下划线模式均支持；
-*   类库、函数文件统一以`.php`为后缀；
-*   类的文件名均以命名空间定义，并且命名空间的路径和类库文件所在路径一致；
-*   类名和类文件名保持一致，统一采用驼峰法命名（首字母大写）；
-
-### 函数和类、属性命名
-
-*   类的命名采用驼峰法，并且首字母大写，例如 `User`、`UserType`，默认不需要添加后缀，例如`UserController`应该直接命名为`User`；
-*   函数的命名使用小写字母和下划线（小写字母开头）的方式，例如 `get_client_ip`；
-*   方法的命名使用驼峰法，并且首字母小写，例如 `getUserName`；
-*   属性的命名使用驼峰法，并且首字母小写，例如 `tableName`、`instance`；
-*   以双下划线“__”打头的函数或方法作为魔法方法，例如 `__call` 和 `__autoload`；
-
-### 常量和配置
-
-*   常量以大写字母和下划线命名，例如 `APP_PATH`和 `THINK_PATH`；
-*   配置参数以小写字母和下划线命名，例如 `url_route_on` 和`url_convert`；
-
-### 数据表和字段
-
-*   数据表和字段采用小写加下划线方式命名，并注意字段名不要以下划线开头，例如 `think_user` 表和 `user_name`字段，不建议使用驼峰和中文作为数据表字段命名。
-
-## 参与开发
-
-请参阅 [ThinkPHP5 核心框架包](https://github.com/top-think/framework)。
-
-## 版权信息
-
-ThinkPHP遵循Apache2开源协议发布，并提供免费使用。
-
-本项目包含的第三方源码和二进制文件之版权信息另行标注。
-
-版权所有Copyright © 2006-2018 by ThinkPHP (http://thinkphp.cn)
-
-All rights reserved。
-
-ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
-
-更多细节参阅 [LICENSE.txt](LICENSE.txt)
+*XMind: ZEN - Trial Version*
