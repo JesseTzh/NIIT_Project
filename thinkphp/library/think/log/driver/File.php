@@ -12,6 +12,7 @@
 namespace think\log\driver;
 
 use think\App;
+use think\Request;
 
 /**
  * 本地化调试输出到文件
@@ -22,34 +23,24 @@ class File
         'time_format' => ' c ',
         'single'      => false,
         'file_size'   => 2097152,
-        'path'        => '',
+        'path'        => LOG_PATH,
         'apart_level' => [],
         'max_files'   => 0,
         'json'        => false,
     ];
 
-    protected $app;
-
     // 实例化并传入参数
-    public function __construct(App $app, $config = [])
+    public function __construct($config = [])
     {
-        $this->app = $app;
-
         if (is_array($config)) {
             $this->config = array_merge($this->config, $config);
-        }
-
-        if (empty($this->config['path'])) {
-            $this->config['path'] = $this->app->getRuntimePath() . 'log' . DIRECTORY_SEPARATOR;
-        } elseif (substr($this->config['path'], -1) != DIRECTORY_SEPARATOR) {
-            $this->config['path'] .= DIRECTORY_SEPARATOR;
         }
     }
 
     /**
      * 日志写入接口
      * @access public
-     * @param  array    $log    日志信息
+     * @param  array    $log 日志信息
      * @param  bool     $append 是否追加请求信息
      * @return bool
      */
@@ -61,7 +52,6 @@ class File
         !is_dir($path) && mkdir($path, 0755, true);
 
         $info = [];
-
         foreach ($log as $type => $val) {
 
             foreach ($val as $msg) {
@@ -77,7 +67,6 @@ class File
                 $filename = $this->getApartLevelFile($path, $type);
 
                 $this->write($info[$type], $filename, true, $append);
-
                 unset($info[$type]);
             }
         }
@@ -87,6 +76,64 @@ class File
         }
 
         return true;
+    }
+
+    /**
+     * 获取主日志文件名
+     * @access public
+     * @return string
+     */
+    protected function getMasterLogFile()
+    {
+        if ($this->config['single']) {
+            $name = is_string($this->config['single']) ? $this->config['single'] : 'single';
+
+            $destination = $this->config['path'] . $name . '.log';
+        } else {
+            $cli = PHP_SAPI == 'cli' ? '_cli' : '';
+
+            if ($this->config['max_files']) {
+                $filename = date('Ymd') . $cli . '.log';
+                $files    = glob($this->config['path'] . '*.log');
+
+                try {
+                    if (count($files) > $this->config['max_files']) {
+                        unlink($files[0]);
+                    }
+                } catch (\Exception $e) {
+                }
+            } else {
+                $filename = date('Ym') . DIRECTORY_SEPARATOR . date('d') . $cli . '.log';
+            }
+
+            $destination = $this->config['path'] . $filename;
+        }
+
+        return $destination;
+    }
+
+    /**
+     * 获取独立日志文件名
+     * @access public
+     * @param  string $path 日志目录
+     * @param  string $type 日志类型
+     * @return string
+     */
+    protected function getApartLevelFile($path, $type)
+    {
+        $cli = PHP_SAPI == 'cli' ? '_cli' : '';
+
+        if ($this->config['single']) {
+            $name = is_string($this->config['single']) ? $this->config['single'] : 'single';
+
+            $name .= '_' . $type;
+        } elseif ($this->config['max_files']) {
+            $name = date('Ymd') . '_' . $type . $cli;
+        } else {
+            $name = date('d') . '_' . $type . $cli;
+        }
+
+        return $path . DIRECTORY_SEPARATOR . $name . '.log';
     }
 
     /**
@@ -120,67 +167,6 @@ class File
         }
 
         return error_log($message, 3, $destination);
-    }
-
-    /**
-     * 获取主日志文件名
-     * @access public
-     * @return string
-     */
-    protected function getMasterLogFile()
-    {
-        if ($this->config['max_files']) {
-            $files = glob($this->config['path'] . '*.log');
-
-            try {
-                if (count($files) > $this->config['max_files']) {
-                    unlink($files[0]);
-                }
-            } catch (\Exception $e) {
-            }
-        }
-
-        if ($this->config['single']) {
-            $name = is_string($this->config['single']) ? $this->config['single'] : 'single';
-
-            $destination = $this->config['path'] . $name . '.log';
-        } else {
-            $cli = PHP_SAPI == 'cli' ? '_cli' : '';
-
-            if ($this->config['max_files']) {
-                $filename = date('Ymd') . $cli . '.log';
-            } else {
-                $filename = date('Ym') . DIRECTORY_SEPARATOR . date('d') . $cli . '.log';
-            }
-
-            $destination = $this->config['path'] . $filename;
-        }
-
-        return $destination;
-    }
-
-    /**
-     * 获取独立日志文件名
-     * @access public
-     * @param  string $path 日志目录
-     * @param  string $type 日志类型
-     * @return string
-     */
-    protected function getApartLevelFile($path, $type)
-    {
-        $cli = PHP_SAPI == 'cli' ? '_cli' : '';
-
-        if ($this->config['single']) {
-            $name = is_string($this->config['single']) ? $this->config['single'] : 'single';
-
-            $name .= '_' . $type;
-        } elseif ($this->config['max_files']) {
-            $name = date('Ymd') . '_' . $type . $cli;
-        } else {
-            $name = date('d') . '_' . $type . $cli;
-        }
-
-        return $path . DIRECTORY_SEPARATOR . $name . '.log';
     }
 
     /**
@@ -229,11 +215,12 @@ class File
      */
     protected function parseLog($info)
     {
+        $request     = Request::instance();
         $requestInfo = [
-            'ip'     => $this->app['request']->ip(),
-            'method' => $this->app['request']->method(),
-            'host'   => $this->app['request']->host(),
-            'uri'    => $this->app['request']->url(),
+            'ip'     => $request->ip(),
+            'method' => $request->method(),
+            'host'   => $request->host(),
+            'uri'    => $request->url(),
         ];
 
         if ($this->config['json']) {
@@ -249,14 +236,14 @@ class File
 
     protected function getDebugLog(&$info, $append, $apart)
     {
-        if ($this->app->isDebug() && $append) {
+        if (App::$debug && $append) {
 
             if ($this->config['json']) {
                 // 获取基本信息
-                $runtime = round(microtime(true) - $this->app->getBeginTime(), 10);
+                $runtime = round(microtime(true) - THINK_START_TIME, 10);
                 $reqs    = $runtime > 0 ? number_format(1 / $runtime, 2) : '∞';
 
-                $memory_use = number_format((memory_get_usage() - $this->app->getBeginMem()) / 1024, 2);
+                $memory_use = number_format((memory_get_usage() - THINK_START_MEM) / 1024, 2);
 
                 $info = [
                     'runtime' => number_format($runtime, 6) . 's',
@@ -267,10 +254,10 @@ class File
 
             } elseif (!$apart) {
                 // 增加额外的调试信息
-                $runtime = round(microtime(true) - $this->app->getBeginTime(), 10);
+                $runtime = round(microtime(true) - THINK_START_TIME, 10);
                 $reqs    = $runtime > 0 ? number_format(1 / $runtime, 2) : '∞';
 
-                $memory_use = number_format((memory_get_usage() - $this->app->getBeginMem()) / 1024, 2);
+                $memory_use = number_format((memory_get_usage() - THINK_START_MEM) / 1024, 2);
 
                 $time_str   = '[运行时间：' . number_format($runtime, 6) . 's] [吞吐率：' . $reqs . 'req/s]';
                 $memory_str = ' [内存消耗：' . $memory_use . 'kb]';

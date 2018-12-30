@@ -12,7 +12,6 @@
 namespace think\db\builder;
 
 use think\db\Builder;
-use think\db\Query;
 
 /**
  * Sqlite数据库驱动
@@ -23,14 +22,12 @@ class Sqlite extends Builder
     /**
      * limit
      * @access public
-     * @param  Query     $query        查询对象
-     * @param  mixed     $limit
+     * @param string $limit
      * @return string
      */
-    public function parseLimit(Query $query, $limit)
+    public function parseLimit($limit)
     {
         $limitStr = '';
-
         if (!empty($limit)) {
             $limit = explode(',', $limit);
             if (count($limit) > 1) {
@@ -39,30 +36,27 @@ class Sqlite extends Builder
                 $limitStr .= ' LIMIT ' . $limit[0] . ' ';
             }
         }
-
         return $limitStr;
     }
 
     /**
      * 随机排序
      * @access protected
-     * @param  Query     $query        查询对象
      * @return string
      */
-    protected function parseRand(Query $query)
+    protected function parseRand()
     {
         return 'RANDOM()';
     }
 
     /**
      * 字段和表名处理
-     * @access public
-     * @param  Query     $query     查询对象
-     * @param  mixed     $key       字段名
-     * @param  bool      $strict   严格检测
+     * @access protected
+     * @param mixed  $key
+     * @param array  $options
      * @return string
      */
-    public function parseKey(Query $query, $key, $strict = false)
+    protected function parseKey($key, $options = [], $strict = false)
     {
         if (is_numeric($key)) {
             return $key;
@@ -71,26 +65,18 @@ class Sqlite extends Builder
         }
 
         $key = trim($key);
-
         if (strpos($key, '.')) {
             list($table, $key) = explode('.', $key, 2);
-
-            $alias = $query->getOptions('alias');
-
             if ('__TABLE__' == $table) {
-                $table = $query->getOptions('table');
-                $table = is_array($table) ? array_shift($table) : $table;
+                $table = $this->query->getTable();
             }
-
-            if (isset($alias[$table])) {
-                $table = $alias[$table];
+            if (isset($options['alias'][$table])) {
+                $table = $options['alias'][$table];
             }
         }
-
         if (isset($table)) {
             $key = $table . '.' . $key;
         }
-
         return $key;
     }
 }

@@ -11,10 +11,10 @@
 
 namespace think\session\driver;
 
-use SessionHandlerInterface;
+use SessionHandler;
 use think\Exception;
 
-class Memcached implements SessionHandlerInterface
+class Memcached extends SessionHandler
 {
     protected $handler = null;
     protected $config  = [
@@ -35,8 +35,8 @@ class Memcached implements SessionHandlerInterface
     /**
      * 打开Session
      * @access public
-     * @param  string    $savePath
-     * @param  mixed     $sessName
+     * @param string    $savePath
+     * @param mixed     $sessName
      */
     public function open($savePath, $sessName)
     {
@@ -44,35 +44,27 @@ class Memcached implements SessionHandlerInterface
         if (!extension_loaded('memcached')) {
             throw new Exception('not support:memcached');
         }
-
         $this->handler = new \Memcached;
-
         // 设置连接超时时间（单位：毫秒）
         if ($this->config['timeout'] > 0) {
             $this->handler->setOption(\Memcached::OPT_CONNECT_TIMEOUT, $this->config['timeout']);
         }
-
         // 支持集群
         $hosts = explode(',', $this->config['host']);
         $ports = explode(',', $this->config['port']);
-
         if (empty($ports[0])) {
             $ports[0] = 11211;
         }
-
         // 建立连接
         $servers = [];
         foreach ((array) $hosts as $i => $host) {
             $servers[] = [$host, (isset($ports[$i]) ? $ports[$i] : $ports[0]), 1];
         }
-
         $this->handler->addServers($servers);
-
         if ('' != $this->config['username']) {
             $this->handler->setOption(\Memcached::OPT_BINARY_PROTOCOL, true);
             $this->handler->setSaslAuthData($this->config['username'], $this->config['password']);
         }
-
         return true;
     }
 
@@ -85,14 +77,13 @@ class Memcached implements SessionHandlerInterface
         $this->gc(ini_get('session.gc_maxlifetime'));
         $this->handler->quit();
         $this->handler = null;
-
         return true;
     }
 
     /**
      * 读取Session
      * @access public
-     * @param  string $sessID
+     * @param string $sessID
      */
     public function read($sessID)
     {
@@ -102,8 +93,8 @@ class Memcached implements SessionHandlerInterface
     /**
      * 写入Session
      * @access public
-     * @param  string $sessID
-     * @param  string $sessData
+     * @param string $sessID
+     * @param String $sessData
      * @return bool
      */
     public function write($sessID, $sessData)
@@ -114,7 +105,7 @@ class Memcached implements SessionHandlerInterface
     /**
      * 删除Session
      * @access public
-     * @param  string $sessID
+     * @param string $sessID
      * @return bool
      */
     public function destroy($sessID)
@@ -125,7 +116,7 @@ class Memcached implements SessionHandlerInterface
     /**
      * Session 垃圾回收
      * @access public
-     * @param  string $sessMaxLifeTime
+     * @param string $sessMaxLifeTime
      * @return true
      */
     public function gc($sessMaxLifeTime)

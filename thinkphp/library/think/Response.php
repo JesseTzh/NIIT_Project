@@ -11,135 +11,100 @@
 
 namespace think;
 
+use think\response\Json as JsonResponse;
+use think\response\Jsonp as JsonpResponse;
 use think\response\Redirect as RedirectResponse;
+use think\response\View as ViewResponse;
+use think\response\Xml as XmlResponse;
 
 class Response
 {
-    /**
-     * 原始数据
-     * @var mixed
-     */
+    // 原始数据
     protected $data;
 
-    /**
-     * 应用对象实例
-     * @var App
-     */
-    protected $app;
-
-    /**
-     * 当前contentType
-     * @var string
-     */
+    // 当前的contentType
     protected $contentType = 'text/html';
 
-    /**
-     * 字符集
-     * @var string
-     */
+    // 字符集
     protected $charset = 'utf-8';
 
-    /**
-     * 状态码
-     * @var integer
-     */
+    //状态
     protected $code = 200;
 
-    /**
-     * 是否允许请求缓存
-     * @var bool
-     */
-    protected $allowCache = true;
-
-    /**
-     * 输出参数
-     * @var array
-     */
+    // 输出参数
     protected $options = [];
-
-    /**
-     * header参数
-     * @var array
-     */
+    // header参数
     protected $header = [];
 
-    /**
-     * 输出内容
-     * @var string
-     */
     protected $content = null;
 
     /**
-     * 架构函数
-     * @access public
-     * @param  mixed $data    输出数据
-     * @param  int   $code
-     * @param  array $header
-     * @param  array $options 输出参数
+     * 构造函数
+     * @access   public
+     * @param mixed $data    输出数据
+     * @param int   $code
+     * @param array $header
+     * @param array $options 输出参数
      */
     public function __construct($data = '', $code = 200, array $header = [], $options = [])
     {
         $this->data($data);
-
         if (!empty($options)) {
             $this->options = array_merge($this->options, $options);
         }
-
         $this->contentType($this->contentType, $this->charset);
-
-        $this->code   = $code;
-        $this->app    = Container::get('app');
         $this->header = array_merge($this->header, $header);
+        $this->code   = $code;
     }
 
     /**
      * 创建Response对象
      * @access public
-     * @param  mixed  $data    输出数据
-     * @param  string $type    输出类型
-     * @param  int    $code
-     * @param  array  $header
-     * @param  array  $options 输出参数
-     * @return Response
+     * @param mixed  $data    输出数据
+     * @param string $type    输出类型
+     * @param int    $code
+     * @param array  $header
+     * @param array  $options 输出参数
+     * @return Response|JsonResponse|ViewResponse|XmlResponse|RedirectResponse|JsonpResponse
      */
     public static function create($data = '', $type = '', $code = 200, array $header = [], $options = [])
     {
         $class = false !== strpos($type, '\\') ? $type : '\\think\\response\\' . ucfirst(strtolower($type));
-
         if (class_exists($class)) {
-            return new $class($data, $code, $header, $options);
+            $response = new $class($data, $code, $header, $options);
+        } else {
+            $response = new static($data, $code, $header, $options);
         }
 
-        return new static($data, $code, $header, $options);
+        return $response;
     }
 
     /**
      * 发送数据到客户端
      * @access public
-     * @return void
+     * @return mixed
      * @throws \InvalidArgumentException
      */
     public function send()
     {
         // 监听response_send
-        $this->app['hook']->listen('response_send', $this);
+        Hook::listen('response_send', $this);
 
         // 处理输出数据
         $data = $this->getContent();
 
         // Trace调试注入
-        if ('cli' != PHP_SAPI && $this->app['env']->get('app_trace', $this->app->config('app.app_trace'))) {
-            $this->app['debug']->inject($this, $data);
+        if (Env::get('app_trace', Config::get('app_trace'))) {
+            Debug::inject($this, $data);
         }
 
-        if (200 == $this->code && $this->allowCache) {
-            $cache = $this->app['request']->getCache();
+        if (200 == $this->code) {
+            $cache = Request::instance()->getCache();
             if ($cache) {
                 $this->header['Cache-Control'] = 'max-age=' . $cache[1] . ',must-revalidate';
                 $this->header['Last-Modified'] = gmdate('D, d M Y H:i:s') . ' GMT';
                 $this->header['Expires']       = gmdate('D, d M Y H:i:s', $_SERVER['REQUEST_TIME'] + $cache[1]) . ' GMT';
-
-                $this->app['cache']->tag($cache[2])->set($cache[0], [$data, $this->header], $cache[1]);
+                Cache::tag($cache[2])->set($cache[0], [$data, $this->header], $cache[1]);
             }
         }
 
@@ -148,11 +113,15 @@ class Response
             http_response_code($this->code);
             // 发送头部信息
             foreach ($this->header as $name => $val) {
-                header($name . (!is_null($val) ? ':' . $val : ''));
+                if (is_null($val)) {
+                    header($name);
+                } else {
+                    header($name . ':' . $val);
+                }
             }
         }
 
-        $this->sendData($data);
+        echo $data;
 
         if (function_exists('fastcgi_finish_request')) {
             // 提高页面响应
@@ -160,18 +129,18 @@ class Response
         }
 
         // 监听response_end
-        $this->app['hook']->listen('response_end', $this);
+        Hook::listen('response_end', $this);
 
         // 清空当次请求有效的数据
         if (!($this instanceof RedirectResponse)) {
-            $this->app['session']->flush();
+            Session::flush();
         }
     }
 
     /**
      * 处理数据
      * @access protected
-     * @param  mixed $data 要处理的数据
+     * @param mixed $data 要处理的数据
      * @return mixed
      */
     protected function output($data)
@@ -180,60 +149,34 @@ class Response
     }
 
     /**
-     * 输出数据
-     * @access protected
-     * @param string $data 要处理的数据
-     * @return void
-     */
-    protected function sendData($data)
-    {
-        echo $data;
-    }
-
-    /**
      * 输出的参数
      * @access public
-     * @param  mixed $options 输出参数
+     * @param mixed $options 输出参数
      * @return $this
      */
     public function options($options = [])
     {
         $this->options = array_merge($this->options, $options);
-
         return $this;
     }
 
     /**
      * 输出数据设置
      * @access public
-     * @param  mixed $data 输出数据
+     * @param mixed $data 输出数据
      * @return $this
      */
     public function data($data)
     {
         $this->data = $data;
-
-        return $this;
-    }
-
-    /**
-     * 是否允许请求缓存
-     * @access public
-     * @param  bool $cache 允许请求缓存
-     * @return $this
-     */
-    public function allowCache($cache)
-    {
-        $this->allowCache = $cache;
-
         return $this;
     }
 
     /**
      * 设置响应头
      * @access public
-     * @param  string|array $name  参数名
-     * @param  string       $value 参数值
+     * @param string|array $name  参数名
+     * @param string       $value 参数值
      * @return $this
      */
     public function header($name, $value = null)
@@ -243,14 +186,12 @@ class Response
         } else {
             $this->header[$name] = $value;
         }
-
         return $this;
     }
 
     /**
      * 设置页面输出内容
-     * @access public
-     * @param  mixed $content
+     * @param $content
      * @return $this
      */
     public function content($content)
@@ -270,114 +211,87 @@ class Response
 
     /**
      * 发送HTTP状态
-     * @access public
-     * @param  integer $code 状态码
+     * @param integer $code 状态码
      * @return $this
      */
     public function code($code)
     {
         $this->code = $code;
-
         return $this;
     }
 
     /**
      * LastModified
-     * @access public
-     * @param  string $time
+     * @param string $time
      * @return $this
      */
     public function lastModified($time)
     {
         $this->header['Last-Modified'] = $time;
-
         return $this;
     }
 
     /**
      * Expires
-     * @access public
-     * @param  string $time
+     * @param string $time
      * @return $this
      */
     public function expires($time)
     {
         $this->header['Expires'] = $time;
-
         return $this;
     }
 
     /**
      * ETag
-     * @access public
-     * @param  string $eTag
+     * @param string $eTag
      * @return $this
      */
     public function eTag($eTag)
     {
         $this->header['ETag'] = $eTag;
-
         return $this;
     }
 
     /**
      * 页面缓存控制
-     * @access public
-     * @param  string $cache 缓存设置
+     * @param string $cache 状态码
      * @return $this
      */
     public function cacheControl($cache)
     {
         $this->header['Cache-control'] = $cache;
-
-        return $this;
-    }
-
-    /**
-     * 设置页面不做任何缓存
-     * @access public
-     * @return $this
-     */
-    public function noCache()
-    {
-        $this->header['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0';
-        $this->header['Pragma']        = 'no-cache';
-
         return $this;
     }
 
     /**
      * 页面输出类型
-     * @access public
-     * @param  string $contentType 输出类型
-     * @param  string $charset     输出编码
+     * @param string $contentType 输出类型
+     * @param string $charset     输出编码
      * @return $this
      */
     public function contentType($contentType, $charset = 'utf-8')
     {
         $this->header['Content-Type'] = $contentType . '; charset=' . $charset;
-
         return $this;
     }
 
     /**
      * 获取头部信息
-     * @access public
-     * @param  string $name 头部名称
+     * @param string $name 头部名称
      * @return mixed
      */
     public function getHeader($name = '')
     {
         if (!empty($name)) {
             return isset($this->header[$name]) ? $this->header[$name] : null;
+        } else {
+            return $this->header;
         }
-
-        return $this->header;
     }
 
     /**
      * 获取原始数据
-     * @access public
      * @return mixed
      */
     public function getData()
@@ -387,7 +301,6 @@ class Response
 
     /**
      * 获取输出数据
-     * @access public
      * @return mixed
      */
     public function getContent()
@@ -405,25 +318,15 @@ class Response
 
             $this->content = (string) $content;
         }
-
         return $this->content;
     }
 
     /**
      * 获取状态码
-     * @access public
      * @return integer
      */
     public function getCode()
     {
         return $this->code;
-    }
-
-    public function __debugInfo()
-    {
-        $data = get_object_vars($this);
-        unset($data['app']);
-
-        return $data;
     }
 }

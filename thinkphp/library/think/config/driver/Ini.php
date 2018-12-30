@@ -13,19 +13,12 @@ namespace think\config\driver;
 
 class Ini
 {
-    protected $config;
-
-    public function __construct($config)
+    public function parse($config)
     {
-        $this->config = $config;
-    }
-
-    public function parse()
-    {
-        if (is_file($this->config)) {
-            return parse_ini_file($this->config, true);
+        if (is_file($config)) {
+            return parse_ini_file($config, true);
         } else {
-            return parse_ini_string($this->config, true);
+            return parse_ini_string($config, true);
         }
     }
 }

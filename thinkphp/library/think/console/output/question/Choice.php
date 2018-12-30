@@ -147,7 +147,7 @@ class Choice extends Question
                     $result = $value;
                 }
 
-                if (false === $result) {
+                if (empty($result)) {
                     throw new \InvalidArgumentException(sprintf($errorMessage, $value));
                 }
                 array_push($multiselectChoices, $result);

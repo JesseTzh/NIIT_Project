@@ -114,13 +114,12 @@ class Process
 
     /**
      * 构造方法
-     * @access public
-     * @param  string         $commandline 指令
-     * @param  string|null    $cwd         工作目录
-     * @param  array|null     $env         环境变量
-     * @param  string|null    $input       输入
-     * @param  int|float|null $timeout     超时时间
-     * @param  array          $options     proc_open的选项
+     * @param string         $commandline 指令
+     * @param string|null    $cwd         工作目录
+     * @param array|null     $env         环境变量
+     * @param string|null    $input       输入
+     * @param int|float|null $timeout     超时时间
+     * @param array          $options     proc_open的选项
      * @throws \RuntimeException
      * @api
      */
@@ -133,7 +132,7 @@ class Process
         $this->commandline = $commandline;
         $this->cwd         = $cwd;
 
-        if (null === $this->cwd && (defined('ZEND_THREAD_SAFE') || '\\' === DIRECTORY_SEPARATOR)) {
+        if (null === $this->cwd && (defined('ZEND_THREAD_SAFE') || '\\' === DS)) {
             $this->cwd = getcwd();
         }
         if (null !== $env) {
@@ -142,10 +141,10 @@ class Process
 
         $this->input = $input;
         $this->setTimeout($timeout);
-        $this->useFileHandles               = '\\' === DIRECTORY_SEPARATOR;
+        $this->useFileHandles               = '\\' === DS;
         $this->pty                          = false;
         $this->enhanceWindowsCompatibility  = true;
-        $this->enhanceSigchildCompatibility = '\\' !== DIRECTORY_SEPARATOR && $this->isSigchildEnabled();
+        $this->enhanceSigchildCompatibility = '\\' !== DS && $this->isSigchildEnabled();
         $this->options                      = array_replace([
             'suppress_errors' => true,
             'binary_pipes'    => true,
@@ -164,8 +163,7 @@ class Process
 
     /**
      * 运行指令
-     * @access public
-     * @param  callback|null $callback
+     * @param callback|null $callback
      * @return int
      */
     public function run($callback = null)
@@ -177,8 +175,7 @@ class Process
 
     /**
      * 运行指令
-     * @access public
-     * @param  callable|null $callback
+     * @param callable|null $callback
      * @return self
      * @throws \RuntimeException
      * @throws ProcessFailedException
@@ -198,8 +195,7 @@ class Process
 
     /**
      * 启动进程并写到 STDIN 输入后返回。
-     * @access public
-     * @param  callable|null $callback
+     * @param callable|null $callback
      * @throws \RuntimeException
      * @throws \RuntimeException
      * @throws \LogicException
@@ -220,7 +216,7 @@ class Process
 
         $commandline = $this->commandline;
 
-        if ('\\' === DIRECTORY_SEPARATOR && $this->enhanceWindowsCompatibility) {
+        if ('\\' === DS && $this->enhanceWindowsCompatibility) {
             $commandline = 'cmd /V:ON /E:ON /C "(' . $commandline . ')';
             foreach ($this->processPipes->getFiles() as $offset => $filename) {
                 $commandline .= ' ' . $offset . '>' . Utils::escapeArgument($filename);
@@ -249,8 +245,7 @@ class Process
 
     /**
      * 重启进程
-     * @access public
-     * @param  callable|null $callback
+     * @param callable|null $callback
      * @return Process
      * @throws \RuntimeException
      * @throws \RuntimeException
@@ -269,8 +264,7 @@ class Process
 
     /**
      * 等待要终止的进程
-     * @access public
-     * @param  callable|null $callback
+     * @param callable|null $callback
      * @return int
      */
     public function wait($callback = null)
@@ -284,8 +278,8 @@ class Process
 
         do {
             $this->checkTimeout();
-            $running = '\\' === DIRECTORY_SEPARATOR ? $this->isRunning() : $this->processPipes->areOpen();
-            $close   = '\\' !== DIRECTORY_SEPARATOR || !$running;
+            $running = '\\' === DS ? $this->isRunning() : $this->processPipes->areOpen();
+            $close   = '\\' !== DS || !$running;
             $this->readPipes(true, $close);
         } while ($running);
 
@@ -302,7 +296,6 @@ class Process
 
     /**
      * 获取PID
-     * @access public
      * @return int|null
      * @throws \RuntimeException
      */
@@ -319,8 +312,7 @@ class Process
 
     /**
      * 将一个 POSIX 信号发送到进程中
-     * @access public
-     * @param  int $signal
+     * @param int $signal
      * @return Process
      */
     public function signal($signal)
@@ -332,7 +324,6 @@ class Process
 
     /**
      * 禁用从底层过程获取输出和错误输出。
-     * @access public
      * @return Process
      */
     public function disableOutput()
@@ -351,7 +342,6 @@ class Process
 
     /**
      * 开启从底层过程获取输出和错误输出。
-     * @access public
      * @return Process
      * @throws \RuntimeException
      */
@@ -368,7 +358,6 @@ class Process
 
     /**
      * 输出是否禁用
-     * @access public
      * @return bool
      */
     public function isOutputDisabled()
@@ -378,8 +367,8 @@ class Process
 
     /**
      * 获取当前的输出管道
-     * @access public
      * @return string
+     * @throws \LogicException
      * @throws \LogicException
      * @api
      */
@@ -391,14 +380,13 @@ class Process
 
         $this->requireProcessIsStarted(__FUNCTION__);
 
-        $this->readPipes(false, '\\' === DIRECTORY_SEPARATOR ? !$this->processInformation['running'] : true);
+        $this->readPipes(false, '\\' === DS ? !$this->processInformation['running'] : true);
 
         return $this->stdout;
     }
 
     /**
      * 以增量方式返回的输出结果。
-     * @access public
      * @return string
      */
     public function getIncrementalOutput()
@@ -420,7 +408,6 @@ class Process
 
     /**
      * 清空输出
-     * @access public
      * @return Process
      */
     public function clearOutput()
@@ -433,7 +420,6 @@ class Process
 
     /**
      * 返回当前的错误输出的过程 (STDERR)。
-     * @access public
      * @return string
      */
     public function getErrorOutput()
@@ -444,14 +430,13 @@ class Process
 
         $this->requireProcessIsStarted(__FUNCTION__);
 
-        $this->readPipes(false, '\\' === DIRECTORY_SEPARATOR ? !$this->processInformation['running'] : true);
+        $this->readPipes(false, '\\' === DS ? !$this->processInformation['running'] : true);
 
         return $this->stderr;
     }
 
     /**
      * 以增量方式返回 errorOutput
-     * @access public
      * @return string
      */
     public function getIncrementalErrorOutput()
@@ -473,7 +458,6 @@ class Process
 
     /**
      * 清空 errorOutput
-     * @access public
      * @return Process
      */
     public function clearErrorOutput()
@@ -486,7 +470,6 @@ class Process
 
     /**
      * 获取退出码
-     * @access public
      * @return null|int
      */
     public function getExitCode()
@@ -502,7 +485,6 @@ class Process
 
     /**
      * 获取退出文本
-     * @access public
      * @return null|string
      */
     public function getExitCodeText()
@@ -516,7 +498,6 @@ class Process
 
     /**
      * 检查是否成功
-     * @access public
      * @return bool
      */
     public function isSuccessful()
@@ -526,7 +507,6 @@ class Process
 
     /**
      * 是否未捕获的信号已被终止子进程
-     * @access public
      * @return bool
      */
     public function hasBeenSignaled()
@@ -544,7 +524,6 @@ class Process
 
     /**
      * 返回导致子进程终止其执行的数。
-     * @access public
      * @return int
      */
     public function getTermSignal()
@@ -562,7 +541,6 @@ class Process
 
     /**
      * 检查子进程信号是否已停止
-     * @access public
      * @return bool
      */
     public function hasBeenStopped()
@@ -576,7 +554,6 @@ class Process
 
     /**
      * 返回导致子进程停止其执行的数。
-     * @access public
      * @return int
      */
     public function getStopSignal()
@@ -590,7 +567,6 @@ class Process
 
     /**
      * 检查是否正在运行
-     * @access public
      * @return bool
      */
     public function isRunning()
@@ -606,7 +582,6 @@ class Process
 
     /**
      * 检查是否已开始
-     * @access public
      * @return bool
      */
     public function isStarted()
@@ -616,7 +591,6 @@ class Process
 
     /**
      * 检查是否已终止
-     * @access public
      * @return bool
      */
     public function isTerminated()
@@ -628,7 +602,6 @@ class Process
 
     /**
      * 获取当前的状态
-     * @access public
      * @return string
      */
     public function getStatus()
@@ -640,12 +613,11 @@ class Process
 
     /**
      * 终止进程
-     * @access public
      */
     public function stop()
     {
         if ($this->isRunning()) {
-            if ('\\' === DIRECTORY_SEPARATOR && !$this->isSigchildEnabled()) {
+            if ('\\' === DS && !$this->isSigchildEnabled()) {
                 exec(sprintf('taskkill /F /T /PID %d 2>&1', $this->getPid()), $output, $exitCode);
                 if ($exitCode > 0) {
                     throw new \RuntimeException('Unable to kill the process');
@@ -670,7 +642,6 @@ class Process
 
     /**
      * 添加一行输出
-     * @access public
      * @param string $line
      */
     public function addOutput($line)
@@ -681,7 +652,6 @@ class Process
 
     /**
      * 添加一行错误输出
-     * @access public
      * @param string $line
      */
     public function addErrorOutput($line)
@@ -692,7 +662,6 @@ class Process
 
     /**
      * 获取被执行的指令
-     * @access public
      * @return string
      */
     public function getCommandLine()
@@ -702,7 +671,6 @@ class Process
 
     /**
      * 设置指令
-     * @access public
      * @param string $commandline
      * @return self
      */
@@ -715,7 +683,6 @@ class Process
 
     /**
      * 获取超时时间
-     * @access public
      * @return float|null
      */
     public function getTimeout()
@@ -725,7 +692,6 @@ class Process
 
     /**
      * 获取idle超时时间
-     * @access public
      * @return float|null
      */
     public function getIdleTimeout()
@@ -735,8 +701,7 @@ class Process
 
     /**
      * 设置超时时间
-     * @access public
-     * @param  int|float|null $timeout
+     * @param int|float|null $timeout
      * @return self
      */
     public function setTimeout($timeout)
@@ -748,8 +713,7 @@ class Process
 
     /**
      * 设置idle超时时间
-     * @access public
-     * @param  int|float|null $timeout
+     * @param int|float|null $timeout
      * @return self
      */
     public function setIdleTimeout($timeout)
@@ -765,13 +729,12 @@ class Process
 
     /**
      * 设置TTY
-     * @access public
-     * @param  bool $tty
+     * @param bool $tty
      * @return self
      */
     public function setTty($tty)
 {
-        if ('\\' === DIRECTORY_SEPARATOR && $tty) {
+        if ('\\' === DS && $tty) {
             throw new \RuntimeException('TTY mode is not supported on Windows platform.');
         }
         if ($tty && (!file_exists('/dev/tty') || !is_readable('/dev/tty'))) {
@@ -785,7 +748,6 @@ class Process
 
     /**
      * 检查是否是tty模式
-     * @access public
      * @return bool
      */
     public function isTty()
@@ -795,8 +757,7 @@ class Process
 
     /**
      * 设置pty模式
-     * @access public
-     * @param  bool $bool
+     * @param bool $bool
      * @return self
      */
     public function setPty($bool)
@@ -808,7 +769,6 @@ class Process
 
     /**
      * 是否是pty模式
-     * @access public
      * @return bool
      */
     public function isPty()
@@ -818,7 +778,6 @@ class Process
 
     /**
      * 获取工作目录
-     * @access public
      * @return string|null
      */
     public function getWorkingDirectory()
@@ -832,8 +791,7 @@ class Process
 
     /**
      * 设置工作目录
-     * @access public
-     * @param  string $cwd
+     * @param string $cwd
      * @return self
      */
     public function setWorkingDirectory($cwd)
@@ -845,7 +803,6 @@ class Process
 
     /**
      * 获取环境变量
-     * @access public
      * @return array
      */
     public function getEnv()
@@ -855,8 +812,7 @@ class Process
 
     /**
      * 设置环境变量
-     * @access public
-     * @param  array $env
+     * @param array $env
      * @return self
      */
     public function setEnv(array $env)
@@ -875,7 +831,6 @@ class Process
 
     /**
      * 获取输入
-     * @access public
      * @return null|string
      */
     public function getInput()
@@ -885,8 +840,7 @@ class Process
 
     /**
      * 设置输入
-     * @access public
-     * @param  mixed $input
+     * @param mixed $input
      * @return self
      */
     public function setInput($input)
@@ -902,7 +856,6 @@ class Process
 
     /**
      * 获取proc_open的选项
-     * @access public
      * @return array
      */
     public function getOptions()
@@ -912,8 +865,7 @@ class Process
 
     /**
      * 设置proc_open的选项
-     * @access public
-     * @param  array $options
+     * @param array $options
      * @return self
      */
     public function setOptions(array $options)
@@ -925,7 +877,6 @@ class Process
 
     /**
      * 是否兼容windows
-     * @access public
      * @return bool
      */
     public function getEnhanceWindowsCompatibility()
@@ -935,8 +886,7 @@ class Process
 
     /**
      * 设置是否兼容windows
-     * @access public
-     * @param  bool $enhance
+     * @param bool $enhance
      * @return self
      */
     public function setEnhanceWindowsCompatibility($enhance)
@@ -948,7 +898,6 @@ class Process
 
     /**
      * 返回是否 sigchild 兼容模式激活
-     * @access public
      * @return bool
      */
     public function getEnhanceSigchildCompatibility()
@@ -958,8 +907,7 @@ class Process
 
     /**
      * 激活 sigchild 兼容性模式。
-     * @access public
-     * @param  bool $enhance
+     * @param bool $enhance
      * @return self
      */
     public function setEnhanceSigchildCompatibility($enhance)
@@ -993,7 +941,6 @@ class Process
 
     /**
      * 是否支持pty
-     * @access public
      * @return bool
      */
     public static function isPtySupported()
@@ -1004,7 +951,7 @@ class Process
             return $result;
         }
 
-        if ('\\' === DIRECTORY_SEPARATOR) {
+        if ('\\' === DS) {
             return $result = false;
         }
 
@@ -1020,12 +967,11 @@ class Process
 
     /**
      * 创建所需的 proc_open 的描述符
-     * @access private
      * @return array
      */
     private function getDescriptors()
 {
-        if ('\\' === DIRECTORY_SEPARATOR) {
+        if ('\\' === DS) {
             $this->processPipes = WindowsPipes::create($this, $this->input);
         } else {
             $this->processPipes = UnixPipes::create($this, $this->input);
@@ -1044,8 +990,7 @@ class Process
 
     /**
      * 建立 wait () 使用的回调。
-     * @access protected
-     * @param  callable|null $callback
+     * @param callable|null $callback
      * @return callable
      */
     protected function buildCallback($callback)
@@ -1068,7 +1013,6 @@ class Process
 
     /**
      * 更新状态
-     * @access protected
      * @param bool $blocking
      */
     protected function updateStatus($blocking)
@@ -1080,7 +1024,7 @@ class Process
         $this->processInformation = proc_get_status($this->process);
         $this->captureExitCode();
 
-        $this->readPipes($blocking, '\\' === DIRECTORY_SEPARATOR ? !$this->processInformation['running'] : true);
+        $this->readPipes($blocking, '\\' === DS ? !$this->processInformation['running'] : true);
 
         if (!$this->processInformation['running']) {
             $this->close();
@@ -1089,7 +1033,6 @@ class Process
 
     /**
      * 是否开启 '--enable-sigchild'
-     * @access protected
      * @return bool
      */
     protected function isSigchildEnabled()
@@ -1110,8 +1053,7 @@ class Process
 
     /**
      * 验证是否超时
-     * @access private
-     * @param  int|float|null $timeout
+     * @param int|float|null $timeout
      * @return float|null
      */
     private function validateTimeout($timeout)
@@ -1129,9 +1071,8 @@ class Process
 
     /**
      * 读取pipes
-     * @access private
-     * @param  bool $blocking
-     * @param  bool $close
+     * @param bool $blocking
+     * @param bool $close
      */
     private function readPipes($blocking, $close)
 {
@@ -1159,7 +1100,6 @@ class Process
 
     /**
      * 关闭资源
-     * @access private
      * @return int 退出码
      */
     private function close()
@@ -1206,9 +1146,8 @@ class Process
 
     /**
      * 将一个 POSIX 信号发送到进程中。
-     * @access private
-     * @param  int  $signal
-     * @param  bool $throwException
+     * @param int  $signal
+     * @param bool $throwException
      * @return bool
      */
     private function doSignal($signal, $throwException)
@@ -1244,8 +1183,7 @@ class Process
 
     /**
      * 确保进程已经开启
-     * @access private
-     * @param  string $functionName
+     * @param string $functionName
      */
     private function requireProcessIsStarted($functionName)
 {
@@ -1256,8 +1194,7 @@ class Process
 
     /**
      * 确保进程已经终止
-     * @access private
-     * @param  string $functionName
+     * @param string $functionName
      */
     private function requireProcessIsTerminated($functionName)
 {
