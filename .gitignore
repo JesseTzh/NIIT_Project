@@ -1,8 +1,0 @@
-/.idea
-/.vscode
-/vendor
-*.log
-.env
-.DS_Store
-#Configuration file of MySql
-config/database.php
