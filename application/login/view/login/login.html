@@ -6,16 +6,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Purple Admin</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="../../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="../../css/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="../../images/favicon.png" />
+  {css href="/static/css/index.css" /}
+  {css href="/static/vendors/iconfonts/mdi/css/materialdesignicons.min.css"/}
+  {css href="/static/vendors/css/vendor.bundle.base.css"/}
+
+  {css href="/static/css/model/style.css"/}
 </head>
 
 <body>
@@ -67,14 +62,13 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
-  <script src="../../vendors/js/vendor.bundle.addons.js"></script>
-  <!-- endinject -->
-  <!-- inject:js -->
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/misc.js"></script>
-  <!-- endinject -->
+  {js href="/static/vendors/js/vendor.bundle.base.js" /}
+  {js href="/static/vendors/js/vendor.bundle.addons.js" /}
+
+  {js href="/static/js/model/off-canvas.js" /}
+  {js href="/static/js/model/misc.js" /}
+
+  {js href="/static/js/model/dashboard.js" /}
 </body>
 
 </html>

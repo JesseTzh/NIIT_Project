@@ -117,7 +117,7 @@ class Build
         // 未指定文件和目录，则创建默认的模块目录和文件
         if (empty($list)) {
             $list = [
-                '__file__' => ['config.php', 'common.php'],
+                '__file__' => ['database.php', 'common.php'],
                 '__dir__'  => ['controller', 'model', 'view'],
             ];
         }
@@ -185,7 +185,7 @@ class Build
     protected static function buildHello($module, $namespace, $suffix = false)
     {
         $filename = APP_PATH . ($module ? $module . DS : '') .
-            'controller' . DS . 'Index' .
+            'controller' . DS . 'index' .
             ($suffix ? 'Controller' : '') . EXT;
 
         if (!is_file($filename)) {
@@ -210,7 +210,7 @@ class Build
      */
     protected static function buildCommon($module)
     {
-        $config = CONF_PATH . ($module ? $module . DS : '') . 'config.php';
+        $config = CONF_PATH . ($module ? $module . DS : '') . 'database.php';
 
         self::checkDirBuild(dirname($config));
 
