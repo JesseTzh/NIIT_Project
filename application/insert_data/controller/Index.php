@@ -13,7 +13,7 @@ class Index extends Controller
     public function ct_generate()
     {
         $insert_ct_data = new Customer;
-        $sql1 = 'max(cast(right(customer_id,5) as  UNSIGNED))';
+        $sql1 = 'max(cast(right(customer_num,5) as  UNSIGNED))';
         $sql = "select ".$sql1."  from customer;";
         $last = $insert_ct_data->query($sql);
 //        dump($last);
@@ -58,7 +58,7 @@ class Index extends Controller
 //        dump($grade);
         for ($j=1;$j<=NUM;$j++) {
             $res = Customer::create([
-                'customer_id' => $id[$j],
+                'customer_num' => $id[$j],
                 'customer_name' => $name[$j],
                 'customer_contact' => $tele[$j],
                 'customer_address' => $address[$j],
@@ -93,6 +93,13 @@ class Index extends Controller
             $img[$i] = $faker->imageUrl($width = 640, $height = 480);
         }
 //        dump($img);
+
+    }
+    public function rd_generate(){
+        for ($i=1;$i<=NUM;$i++){
+            $rd_num = mt_rand(1,99999);
+            $num_len = strlen($rd_num);
+        }
 
     }
 }
