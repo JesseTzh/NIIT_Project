@@ -74,3 +74,4 @@ class AfterSale extends Controller{
 		return $this->fetch();
 	}
 }
+
