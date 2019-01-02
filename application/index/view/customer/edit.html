@@ -1,0 +1,77 @@
+{extend name="layout" /}
+{block name="content"}
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+		<div class="row-content am-cf">
+		<div class="row">
+				<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+								<div class="widget-head am-cf">
+										<div class="widget-title am-fl">编辑customer</div>
+										<div class="widget-function am-fr">
+												<a href="javascript:;" class="am-icon-cog"></a>
+										</div>
+								</div>
+								<div class="widget-body am-fr">
+										<form class="am-form tpl-form-border-form" method="post">
+	 
+	<input type="hidden" name="id" value="{$customer.id}" />
+		<div class="am-form-group">
+			<label for="customer_num" class="am-u-sm-12 am-form-label am-text-left">客户号					<span class="tpl-form-line-small-title">customer_num</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($customer.customer_num)"}{$customer.customer_num}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="customer_num" name="customer_num" 
+	placeholder="请输入客户号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="customer_name" class="am-u-sm-12 am-form-label am-text-left">姓名					<span class="tpl-form-line-small-title">customer_name</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($customer.customer_name)"}{$customer.customer_name}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="customer_name" name="customer_name" 
+	placeholder="请输入姓名">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="customer_contact" class="am-u-sm-12 am-form-label am-text-left">联系方式					<span class="tpl-form-line-small-title">customer_contact</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($customer.customer_contact)"}{$customer.customer_contact}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="customer_contact" name="customer_contact" 
+	placeholder="请输入联系方式">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="customer_address" class="am-u-sm-12 am-form-label am-text-left">地址					<span class="tpl-form-line-small-title">customer_address</span></label>
+			<div class="am-u-sm-12">
+					<textarea  class="tpl-form-input am-margin-top-xs" id="customer_address" name="customer_address" cols="30" rows="10">{if condition="isset($customer.customer_address)"}{$customer.customer_address}{/if}
+</textarea>			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="customer_grade" class="am-u-sm-12 am-form-label am-text-left">客户等级					<span class="tpl-form-line-small-title">customer_grade</span></label>
+			<div class="am-u-sm-12">
+					<span>0</span>
+<input type="radio" value="0" 
+    {if condition="isset($customer.customer_grade) and $customer.customer_grade eq  '0' "}
+    checked="checked"{/if}
+    class="am-radio-inline am-margin-top-xs" name="customer_grade">
+<span>1</span>
+<input type="radio" value="1" 
+    {if condition="isset($customer.customer_grade) and $customer.customer_grade eq  '1' "}
+    checked="checked"{/if}
+    class="am-radio-inline am-margin-top-xs" name="customer_grade">
+			</div>
+	</div>
+		<div class="am-form-group">
+			<div class="am-u-sm-12 am-u-sm-push-12">
+					<button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+			</div>
+	</div>
+</form>
+
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+{/block}
