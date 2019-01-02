@@ -1,0 +1,80 @@
+{extend name="layout" /}
+{block name="content"}
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+		<div class="row-content am-cf">
+		<div class="row">
+				<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+								<div class="widget-head am-cf">
+										<div class="widget-title am-fl">编辑feedback</div>
+										<div class="widget-function am-fr">
+												<a href="javascript:;" class="am-icon-cog"></a>
+										</div>
+								</div>
+								<div class="widget-body am-fr">
+										<form class="am-form tpl-form-border-form" method="post">
+	 
+	<input type="hidden" name="id" value="{$feedback.id}" />
+		<div class="am-form-group">
+			<label for="feedback_id" class="am-u-sm-12 am-form-label am-text-left">售后反馈单编号					<span class="tpl-form-line-small-title">feedback_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($feedback.feedback_id)"}{$feedback.feedback_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="feedback_id" name="feedback_id" 
+	placeholder="请输入售后反馈单编号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="feedback_after_sale_id" class="am-u-sm-12 am-form-label am-text-left">对应售后服务单编号					<span class="tpl-form-line-small-title">feedback_after_sale_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($feedback.feedback_after_sale_id)"}{$feedback.feedback_after_sale_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="feedback_after_sale_id" name="feedback_after_sale_id" 
+	placeholder="请输入对应售后服务单编号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="feedback_after_sale_empolyee" class="am-u-sm-12 am-form-label am-text-left">售后负责人员					<span class="tpl-form-line-small-title">feedback_after_sale_empolyee</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($feedback.feedback_after_sale_empolyee)"}{$feedback.feedback_after_sale_empolyee}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="feedback_after_sale_empolyee" name="feedback_after_sale_empolyee" 
+	placeholder="请输入售后负责人员">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="feedback_processing_type" class="am-u-sm-12 am-form-label am-text-left">售后处理方式					<span class="tpl-form-line-small-title">feedback_processing_type</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($feedback.feedback_processing_type)"}{$feedback.feedback_processing_type}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="feedback_processing_type" name="feedback_processing_type" 
+	placeholder="请输入售后处理方式">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="feedback_after_sale_cost" class="am-u-sm-12 am-form-label am-text-left">售后费用					<span class="tpl-form-line-small-title">feedback_after_sale_cost</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($feedback.feedback_after_sale_cost)"}{$feedback.feedback_after_sale_cost}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="feedback_after_sale_cost" name="feedback_after_sale_cost" 
+	placeholder="请输入售后费用">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="feedback_situation_description" class="am-u-sm-12 am-form-label am-text-left">处理情况说明					<span class="tpl-form-line-small-title">feedback_situation_description</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($feedback.feedback_situation_description)"}{$feedback.feedback_situation_description}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="feedback_situation_description" name="feedback_situation_description" 
+	placeholder="请输入处理情况说明">			</div>
+	</div>
+		<div class="am-form-group">
+			<div class="am-u-sm-12 am-u-sm-push-12">
+					<button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+			</div>
+	</div>
+</form>
+
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+{/block}

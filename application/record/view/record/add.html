@@ -1,0 +1,77 @@
+{extend name="layout" /}
+{block name="content"}
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+		<div class="row-content am-cf">
+		<div class="row">
+				<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+								<div class="widget-head am-cf">
+										<div class="widget-title am-fl">新建record</div>
+										<div class="widget-function am-fr">
+											<a href="javascript:;" class="am-icon-cog"></a>
+										</div>
+								</div>
+								<div class="widget-body am-fr">
+										<form class="am-form tpl-form-border-form" method="post">
+		<div class="am-form-group">
+			<label for="login_num" class="am-u-sm-12 am-form-label am-text-left">登陆记录编码					<span class="tpl-form-line-small-title">login_num</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($record.login_num)"}{$record.login_num}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="login_num" name="login_num" 
+	placeholder="请输入登陆记录编码">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="login_employee_num" class="am-u-sm-12 am-form-label am-text-left">登陆员工编号					<span class="tpl-form-line-small-title">login_employee_num</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($record.login_employee_num)"}{$record.login_employee_num}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="login_employee_num" name="login_employee_num" 
+	placeholder="请输入登陆员工编号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="login_time" class="am-u-sm-12 am-form-label am-text-left">登陆时间					<span class="tpl-form-line-small-title">login_time</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($record.login_time)"}{$record.login_time}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="login_time" name="login_time" 
+	placeholder="请输入登陆时间">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="login_ip" class="am-u-sm-12 am-form-label am-text-left">登陆IP					<span class="tpl-form-line-small-title">login_ip</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($record.login_ip)"}{$record.login_ip}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="login_ip" name="login_ip" 
+	placeholder="请输入登陆IP">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="login_user_agent" class="am-u-sm-12 am-form-label am-text-left">登陆UserAgent					<span class="tpl-form-line-small-title">login_user_agent</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($record.login_user_agent)"}{$record.login_user_agent}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="login_user_agent" name="login_user_agent" 
+	placeholder="请输入登陆UserAgent">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="login_state" class="am-u-sm-12 am-form-label am-text-left">登陆状况					<span class="tpl-form-line-small-title">login_state</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($record.login_state)"}{$record.login_state}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="login_state" name="login_state" 
+	placeholder="请输入登陆状况">			</div>
+	</div>
+		<div class="am-form-group">
+			<div class="am-u-sm-12 am-u-sm-push-12">
+					<button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+			</div>
+	</div>
+</form>
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+{/block}

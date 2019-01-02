@@ -1,0 +1,104 @@
+{extend name="layout" /}
+{block name="content"}
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+		<div class="row-content am-cf">
+		<div class="row">
+				<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+								<div class="widget-head am-cf">
+										<div class="widget-title am-fl">编辑product</div>
+										<div class="widget-function am-fr">
+												<a href="javascript:;" class="am-icon-cog"></a>
+										</div>
+								</div>
+								<div class="widget-body am-fr">
+										<form class="am-form tpl-form-border-form" method="post">
+	 
+	<input type="hidden" name="id" value="{$product.id}" />
+		<div class="am-form-group">
+			<label for="product_num" class="am-u-sm-12 am-form-label am-text-left">产品编号					<span class="tpl-form-line-small-title">product_num</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_num)"}{$product.product_num}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_num" name="product_num" 
+	placeholder="请输入产品编号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="product_name" class="am-u-sm-12 am-form-label am-text-left">产品名称					<span class="tpl-form-line-small-title">product_name</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_name)"}{$product.product_name}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_name" name="product_name" 
+	placeholder="请输入产品名称">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="product_pic" class="am-u-sm-12 am-form-label am-text-left">产品图片					<span class="tpl-form-line-small-title">product_pic</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_pic)"}{$product.product_pic}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_pic" name="product_pic" 
+	placeholder="请输入产品图片">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="product_main_type" class="am-u-sm-12 am-form-label am-text-left">产品主类					<span class="tpl-form-line-small-title">product_main_type</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_main_type)"}{$product.product_main_type}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_main_type" name="product_main_type" 
+	placeholder="请输入产品主类">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="product_secondary_type" class="am-u-sm-12 am-form-label am-text-left">产品次要类别					<span class="tpl-form-line-small-title">product_secondary_type</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_secondary_type)"}{$product.product_secondary_type}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_secondary_type" name="product_secondary_type" 
+	placeholder="请输入产品次要类别">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="product_cost" class="am-u-sm-12 am-form-label am-text-left">产品单价					<span class="tpl-form-line-small-title">product_cost</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_cost)"}{$product.product_cost}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_cost" name="product_cost" 
+	placeholder="请输入产品单价">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="product_sale" class="am-u-sm-12 am-form-label am-text-left">产品售价					<span class="tpl-form-line-small-title">product_sale</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_sale)"}{$product.product_sale}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_sale" name="product_sale" 
+	placeholder="请输入产品售价">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="product_unit" class="am-u-sm-12 am-form-label am-text-left">计量单位					<span class="tpl-form-line-small-title">product_unit</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_unit)"}{$product.product_unit}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_unit" name="product_unit" 
+	placeholder="请输入计量单位">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="product_detail" class="am-u-sm-12 am-form-label am-text-left">规格					<span class="tpl-form-line-small-title">product_detail</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($product.product_detail)"}{$product.product_detail}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="product_detail" name="product_detail" 
+	placeholder="请输入规格">			</div>
+	</div>
+		<div class="am-form-group">
+			<div class="am-u-sm-12 am-u-sm-push-12">
+					<button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+			</div>
+	</div>
+</form>
+
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+{/block}

@@ -1,0 +1,98 @@
+{extend name="layout" /}
+{block name="content"}
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+		<div class="row-content am-cf">
+		<div class="row">
+				<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+								<div class="widget-head am-cf">
+										<div class="widget-title am-fl">编辑after_sale</div>
+										<div class="widget-function am-fr">
+												<a href="javascript:;" class="am-icon-cog"></a>
+										</div>
+								</div>
+								<div class="widget-body am-fr">
+										<form class="am-form tpl-form-border-form" method="post">
+	 
+	<input type="hidden" name="id" value="{$after_sale.id}" />
+		<div class="am-form-group">
+			<label for="after_sale_id" class="am-u-sm-12 am-form-label am-text-left">售后服务单号					<span class="tpl-form-line-small-title">after_sale_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($after_sale.after_sale_id)"}{$after_sale.after_sale_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="after_sale_id" name="after_sale_id" 
+	placeholder="请输入售后服务单号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="after_sale_order_id" class="am-u-sm-12 am-form-label am-text-left">对应订单编号					<span class="tpl-form-line-small-title">after_sale_order_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($after_sale.after_sale_order_id)"}{$after_sale.after_sale_order_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="after_sale_order_id" name="after_sale_order_id" 
+	placeholder="请输入对应订单编号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="after_sale_type" class="am-u-sm-12 am-form-label am-text-left">售后问题分类					<span class="tpl-form-line-small-title">after_sale_type</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($after_sale.after_sale_type)"}{$after_sale.after_sale_type}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="after_sale_type" name="after_sale_type" 
+	placeholder="请输入售后问题分类">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="after_sale_details" class="am-u-sm-12 am-form-label am-text-left">问题详情					<span class="tpl-form-line-small-title">after_sale_details</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($after_sale.after_sale_details)"}{$after_sale.after_sale_details}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="after_sale_details" name="after_sale_details" 
+	placeholder="请输入问题详情">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="after_sale_empolyee_id" class="am-u-sm-12 am-form-label am-text-left">售后人员					<span class="tpl-form-line-small-title">after_sale_empolyee_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($after_sale.after_sale_empolyee_id)"}{$after_sale.after_sale_empolyee_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="after_sale_empolyee_id" name="after_sale_empolyee_id" 
+	placeholder="请输入售后人员">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="after_sale_date" class="am-u-sm-12 am-form-label am-text-left">受理日期					<span class="tpl-form-line-small-title">after_sale_date</span></label>
+			<div class="am-u-sm-12">
+					
+<input type="text"
+	value="{if condition="isset($after_sale.after_sale_date)"}{$after_sale.after_sale_date}{/if}"
+	class=" am-margin-top-xs" id="after_sale_date" name="after_sale_date" id="after_sale_date"
+	placeholder="请输入受理日期">
+
+	<script>
+		$(function(){
+			$('#after_sale_date').datetimepicker({
+				language:  'zh-CN',
+				format: 'yyyy-mm-dd hh:ii:ss'
+			});
+		})
+	</script>			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="after_sale_state" class="am-u-sm-12 am-form-label am-text-left">服务单状态					<span class="tpl-form-line-small-title">after_sale_state</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($after_sale.after_sale_state)"}{$after_sale.after_sale_state}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="after_sale_state" name="after_sale_state" 
+	placeholder="请输入服务单状态">			</div>
+	</div>
+		<div class="am-form-group">
+			<div class="am-u-sm-12 am-u-sm-push-12">
+					<button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+			</div>
+	</div>
+</form>
+
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+{/block}
