@@ -1,0 +1,28 @@
+ <div class="left-sidebar">
+            <!-- 用户信息 -->
+            <div class="tpl-sidebar-user-panel">
+                <div class="tpl-user-panel-slide-toggleable">
+                    <div class="tpl-user-panel-profile-picture">
+                        <img src="/assets/img/user04.png" alt="">
+                    </div>
+                    <span class="user-panel-logged-in-text">
+              <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+              User
+          </span>
+                </div>
+            </div>
+
+            <!-- 菜单 -->
+			<ul class="sidebar-nav">
+			
+<li class="sidebar-nav-heading">控制面板 <span class="sidebar-nav-heading-info"> Dashboard</span></li>
+	<li class="sidebar-nav-link">
+		<a href="{:url(\\think\\Request::instance()->module().'/Customer/lists')}">
+				<i class="am-icon-wpforms sidebar-nav-link-logo"></i>客户管理		</a>
+	</li>
+	<li class="sidebar-nav-link">
+		<a href="{:url(\\think\\Request::instance()->module().'/Order/lists')}">
+				<i class="am-icon-wpforms sidebar-nav-link-logo"></i>订单管理		</a>
+	</li>
+            </ul>
+        </div>
