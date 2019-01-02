@@ -120,4 +120,4 @@ $RECYCLE.BIN/
 *.lnk
 
 #config
-application/database.php
+conf/database.php
