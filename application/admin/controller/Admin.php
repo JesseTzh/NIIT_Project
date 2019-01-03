@@ -13,6 +13,11 @@ use app\index\controller\Customer;
 use app\employee\controller\Employee;
 
 class Admin extends Controller{
+    public function index(){
+        //进入后的主函数，待完善为dashboard
+        $this->redirect('admin_customer');
+}
+
     public function admin_customer(){
 //        return $this->fetch('admin');
 //        dump(config());

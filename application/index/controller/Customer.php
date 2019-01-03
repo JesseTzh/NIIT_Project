@@ -73,4 +73,10 @@ class Customer extends Controller{
 		$this->assign('customerList', $customerList);
 		return $this->fetch();
 	}
+
+    public function lists_val(){
+        $customerList = $this->model->lists($this->request, 12);
+//        $this->assign('customerList', $customerList);
+        return $customerList;
+    }
 }

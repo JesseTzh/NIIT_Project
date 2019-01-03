@@ -38,12 +38,12 @@ class Login extends Controller{
                $employee_character_num = Db::table('employee')->where('employee_num', $employee_num)->value('employee_character_num');
                \session('employee_character_num', $employee_character_num);
                //登陆成功，跳转主页（by Paul）
-               $this->redirect('index/Customer/lists');
-//               switch ($employee_character_num){
-//                   case 1:
-//                       $this->redirect('manager/manager/show');
-//                   //留空等待补充
-//               }
+//               $this->redirect('index/Customer/lists');
+               switch ($employee_character_num){
+                   case 0:
+                       $this->redirect('admin/admin/index');
+                   //留空等待补充
+               }
            }
            else{
                //登录失败，记录入库

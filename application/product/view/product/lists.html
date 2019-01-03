@@ -30,10 +30,10 @@
 		<table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
 				<thead>
 					<tr>
-												<th>产品ID</th>
+												<th style="display: none">产品ID</th>
 												<th>产品编号</th>
 												<th>产品名称</th>
-												<th>产品图片</th>
+												<th style="display: none">产品图片</th>
 												<th>产品主类</th>
 												<th>产品次要类别</th>
 												<th>产品单价</th>
@@ -46,10 +46,10 @@
 				<tbody>
 						{volist name="productList" id="vo"}
 						<tr class="gradeX">
-																<td>{$vo.id}</td>
+																<td style="display: none">{$vo.id}</td>
 																<td>{$vo.product_num}</td>
 																<td>{$vo.product_name}</td>
-																<td>{$vo.product_pic}</td>
+																<td style="display: none">{$vo.product_pic}</td>
 																<td>{$vo.product_main_type}</td>
 																<td>{$vo.product_secondary_type}</td>
 																<td>{$vo.product_cost}</td>

@@ -73,4 +73,12 @@ class Product extends Controller{
 		$this->assign('productList', $productList);
 		return $this->fetch();
 	}
+    public function sort(){
+        return $this->fetch();
+    }
+    public function getPost(){
+	    $request = request();
+	    $result = $request->post();
+	    dump($result);
+    }
 }

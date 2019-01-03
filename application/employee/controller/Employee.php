@@ -73,4 +73,10 @@ class Employee extends Controller{
 		$this->assign('employeeList', $employeeList);
 		return $this->fetch();
 	}
+
+	public function lists_val(){
+	    //返回员工列表
+        $employeeList = $this->model->lists($this->request, 12);
+        return $employeeList;
+    }
 }
