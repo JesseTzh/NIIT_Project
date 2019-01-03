@@ -45,6 +45,7 @@ class Product extends Model {
         $condition = $request->param('condition');
         return $this->where(json_decode($condition))->paginate($itemNum);
     }
+    //显示分类
     public function sort(){
         return $this->view('sort');
     }

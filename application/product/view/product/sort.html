@@ -1,89 +1,13 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-    <!--<meta charset="UTF-8">-->
-    <!--<title>sort</title>-->
-    <!--<meta name="description" content="app-由ThinkphpHelper生成">-->
-    <!--<meta name="keywords" content="index">-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <!--<meta name="renderer" content="webkit">-->
-    <!--<meta name="author" content="sjj">-->
-    <!--<meta http-equiv="Cache-Control" content="no-siteapp" />-->
-    <!--<link rel="icon" type="image/png" href="/assets/i/favicon.png">-->
-    <!--<link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">-->
-    <!--<meta name="apple-mobile-web-app-title" content="Amaze UI" />-->
-    <!--<script src="/assets/js/echarts.min.js"></script>-->
-    <!--<link rel="stylesheet" href="/assets/css/amazeui.min.css" />-->
-    <!--<link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css" />-->
-    <!--<link rel="stylesheet" href="/assets/css/amazeui.datetimepicker.css"/>-->
-    <!--<link rel="stylesheet" href="/assets/css/app.css">-->
-    <!--<script src="/assets/js/jquery.min.js"></script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div data-am-widget="tabs"-->
-     <!--class="am-tabs am-tabs-d2"-->
-<!--&gt;-->
-    <!--<ul class="am-tabs-nav am-cf">-->
-        <!--<li class="am-active"><a href="[data-tab-panel-0]">电视</a></li>-->
-        <!--<li class=""><a href="[data-tab-panel-1]">冰箱</a></li>-->
-        <!--<li class=""><a href="[data-tab-panel-2]">空调</a></li>-->
-        <!--<li class=""><a href="[data-tab-panel-3]">洗衣机</a></li>-->
-        <!--<li class=""><a href="[data-tab-panel-4]">厨卫大电</a></li>-->
-        <!--<li class=""><a href="[data-tab-panel-5]">厨房小电</a></li>-->
-        <!--<li class=""><a href="[data-tab-panel-6]">生活电器</a></li>-->
-        <!--<li class=""><a href="[data-tab-panel-7]">个护健康</a></li>-->
-        <!--<li class=""><a href="[data-tab-panel-8]">家庭影院</a></li>-->
-
-    <!--</ul>-->
-    <!--<div class="am-tabs-bd">-->
-        <!--<div data-tab-panel-0 class="am-tab-panel am-active">-->
-
-        <!--</div>-->
-        <!--<div data-tab-panel-1 class="am-tab-panel ">-->
-
-        <!--</div>-->
-        <!--<div data-tab-panel-2 class="am-tab-panel ">-->
-
-        <!--</div>-->
-        <!--<div data-tab-panel-3 class="am-tab-panel ">-->
-
-        <!--</div>-->
-        <!--<div data-tab-panel-4 class="am-tab-panel ">-->
-
-        <!--</div>-->
-        <!--<div data-tab-panel-5 class="am-tab-panel ">-->
-
-        <!--</div>-->
-        <!--<div data-tab-panel-6 class="am-tab-panel ">-->
-
-        <!--</div>-->
-        <!--<div data-tab-panel-7 class="am-tab-panel ">-->
-
-        <!--</div>-->
-        <!--<div data-tab-panel-8 class="am-tab-panel ">-->
-
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-<!--<script src="/assets/js/amazeui.min.js"></script>-->
-<!--<script src="/assets/js/amazeui.datatables.min.js"></script>-->
-<!--<script src="/assets/js/dataTables.responsive.min.js"></script>-->
-<!--<script src="/assets/js/amazeui.datetimepicker.min.js"></script>-->
-<!--<script src="/assets/js/locales/amazeui.datetimepicker.zh-CN.js" type="text/javascript" charset="UTF-8"></script>-->
-<!--<script src="/assets/js/app.js"></script>-->
-<!--</body>-->
-<!--</html>-->
-
 {extend name="layout" /}
 {block name="content"}
 <div class="tpl-content-wrapper">
 <div data-am-widget="tabs"
      class="am-tabs am-tabs-d2"
 >
-    <ul class="am-tabs-nav am-cf">
-        <li class="am-active"><a href="[data-tab-panel-0]">电视</a></li>
-        <li class="am-text-sm"><a href="[data-tab-panel-1]">冰箱</a></li>
-        <li class="am-text-sm"><a href="[data-tab-panel-2]">空调</a></li>
+    <ul class="am-tabs-nav am-cf" >
+        <li class="am-active"><a href="[data-tab-panel-0]" method="get">电视</a></li>
+        <li class=""><a href="[data-tab-panel-1]">冰箱</a></li>
+        <li class=""><a href="[data-tab-panel-2]">空调</a></li>
         <li class=""><a href="[data-tab-panel-3]">洗衣机</a></li>
         <li class=""><a href="[data-tab-panel-4]">厨卫大电</a></li>
         <li class=""><a href="[data-tab-panel-5]">厨房小电</a></li>
@@ -94,31 +18,175 @@
     </ul>
     <div class="am-tabs-bd">
         <div data-tab-panel-0 class="am-tab-panel am-active">
-
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
         <div data-tab-panel-1 class="am-tab-panel ">
-
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
         <div data-tab-panel-2 class="am-tab-panel ">
-
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
         <div data-tab-panel-3 class="am-tab-panel ">
-
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
         <div data-tab-panel-4 class="am-tab-panel ">
-
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
         <div data-tab-panel-5 class="am-tab-panel ">
-
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
         <div data-tab-panel-6 class="am-tab-panel ">
-
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
-        <div data-tab-panel-7 class="am-tab-panel ">
-
+        <div  data-tab-panel-7 class="am-tab-panel ">
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
         <div data-tab-panel-8 class="am-tab-panel ">
-
+            <div class="am-u-sm-12">
+                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                    <thead>
+                    <tr>
+                        <th style="display: none">产品ID</th>
+                        <th>产品编号</th>
+                        <th>产品名称</th>
+                        <th>产品类别</th>
+                        <th>产品单价</th>
+                        <th>产品售价</th>
+                        <th>计量单位</th>
+                        <th>规格</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 </div>
