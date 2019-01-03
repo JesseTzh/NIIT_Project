@@ -25,6 +25,8 @@ class Employee extends Model{
             //存在当前用户，验证密码
             if($Employee->checkPassword($employee_password)){
                 //密码正确，id写入session
+                $employee_department_num = $Employee->getAttr('employee_department_num');
+                session('employee_department_num', $employee_department_num);
                 session('employee_num', $employee_num);
                 return true;
             }
