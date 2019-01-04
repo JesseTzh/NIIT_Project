@@ -8,17 +8,34 @@
 
     {css href="/static/css/model/style.css"/}
 </head>
-<body>
-    <div class="container-scroller">
-        <button class="btn   btn-gradient-success mt-2" onclick="location.href='index.php/login/login/index'">Let's Go!</button>
-        <img id="main_pic" src="/static/images/main.jpg" style="width: 100%;">
-    </div>
-{js href="/static/vendors/js/vendor.bundle.base.js" /}
-{js href="/static/vendors/js/vendor.bundle.addons.js" /}
+<body style="height: 100%; margin: 0; text-align: center;">
+    <!--<div class="container-scroller">-->
+        <!--<button class="btn   btn-gradient-success mt-2" onclick="location.href='index.php/login/login/index'">Let's Go!</button>-->
+        <!--<img id="main_pic" src="/static/images/main.jpg" style="width: 100%;">-->
+        <div id="main_body" style="background-color: #2A2A2A;">
+            <div id="container" style="height: 53em; z-index: 0"></div>
+            <div id="button_content" style="z-index: 999;">
+                <img src="/static/images/Logo.png" onclick="location.href='index.php/login/login/index'">
+                <br>
+                <!--<button class="btn   btn-gradient-success mt-2" onclick="location.href='index.php/login/login/index'">Let's Go!</button>-->
+            </div>
+        </div>
+    <!--</div>-->
+    {js href="/static/vendors/js/vendor.bundle.base.js" /}
+    {js href="/static/vendors/js/vendor.bundle.addons.js" /}
 
-{js href="/static/js/model/off-canvas.js" /}
-{js href="/static/js/model/misc.js" /}
-
-{js href="/static/js/model/dashboard.js" /}
+    {js href="/static/js/model/off-canvas.js" /}
+    {js href="/static/js/model/misc.js" /}
+    {js href="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts.js" /}
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    {js href="/static/js/echarts/index.js" /}
 </body>
 </html>
