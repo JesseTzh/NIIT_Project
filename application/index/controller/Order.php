@@ -70,6 +70,7 @@ class Order extends Controller{
 		//列表
 	public function lists(){
 		$orderList = $this->model->lists($this->request, 12);	
+        //dump($orderList);
 		$this->assign('orderList', $orderList);
 		return $this->fetch();
 	}

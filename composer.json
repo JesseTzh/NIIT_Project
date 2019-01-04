@@ -1,0 +1,6 @@
+{
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.6",
+        "fzaninotto/faker": "^1.8"
+    }
+}

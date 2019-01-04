@@ -15,7 +15,7 @@
                             <div class="am-form-group">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <a class="am-btn am-btn-default am-btn-success" href="{:url('customer/add')}">
+                                        <a class="am-btn am-btn-default am-btn-success" href="{:url('/index/customer/add')}">
                                             <span class="am-icon-plus"></span> 新增
                                         </a>
                                         <!--
@@ -51,10 +51,10 @@
                                     <td>{$vo.customer_grade}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
-                                            <a  href="{:url('customer/edit', ['id'=>$vo['id']])}">
+                                            <a  href="{:url('/index/customer/edit', ['id'=>$vo['id']])}">
                                                 <i class="am-icon-pencil"></i> 编辑
                                             </a>
-                                            <a href="{:url('customer/delete', ['id'=>$vo['id']])}" onclick='return confirm("确定删除吗？")' class="tpl-table-black-operation-del">
+                                            <a href="{:url('/index/customer/delete', ['id'=>$vo['id']])}" onclick='return confirm("确定删除吗？")' class="tpl-table-black-operation-del">
                                                 <i class="am-icon-trash"></i> 删除
                                             </a>
                                         </div>
