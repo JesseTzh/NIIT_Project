@@ -10,7 +10,7 @@ use Faker;
 use app\insert_data\model\Customer;
 use think\Db;
 
-define('NUM',10);
+define('NUM',100);
 
 class Index extends Controller
 {
@@ -428,18 +428,57 @@ class Index extends Controller
                 $zero .= "0";
             }
             $faker = Faker\Factory::create();
-            $od_id="OD" .mt_rand(2017,2018) .$faker->month .$zero .$od_num;
+            $date_s = $faker->dateTimeThisYear;
+            $date_n = $this->object_to_array($date_s);
+            $date[$i] = $date_n['date'];
+            //销售日期
+            $od_id="OD" .substr($date[$i],0,4) .substr($date[$i],5,2) .$zero .$od_num;
             $od_num++;
             $id[$i]=$od_id;
             //订单ID
-            $sql_pd = "select product_num from product order by rand() limit 1;";
-            $rand_pd = $insert_od_data->query($sql_pd);
-            $pd_id[$i] = $rand_pd[0]["product_num"];
-            //生成产品ID
             $sql_em = "select employee_num from employee where employee_character_num=2 order by rand() limit 1;";
             $rand_em = $insert_od_data->query($sql_em);
             $em_id[$i] = $rand_em[0]["employee_num"];
             //生成雇员ID
+            $de_num_sql = "select employee_department_num from employee where employee_num='".$em_id[$i]."';";
+            $de_num_ob = $insert_od_data->query($de_num_sql);
+            $de_num = $de_num_ob[0]["employee_department_num"];
+            $de[$i] = 0;
+            switch ($de_num){
+                case 1:
+                    $de[$i] = "电视";
+                    break;
+                case 2:
+                    $de[$i] = "空调";
+                    break;
+                case 3:
+                    $de[$i] = "洗衣机";
+                    break;
+                case 4:
+                    $de[$i] = "冰箱";
+                    break;
+                case 5:
+                    $de[$i] = "厨卫大电";
+                    break;
+                case 6:
+                    $de[$i] = "厨房小电";
+                    break;
+                case 7:
+                    $de[$i] = "生活电器";
+                    break;
+                case 8:
+                    $de[$i] = "个护健康";
+                    break;
+                case 9:
+                    $de[$i] = "家庭影院";
+                    break;
+            }
+            //生成产品分类
+            $sql_pd = "select product_num from product where product_main_type='".$de[$i]."' order by rand() limit 1;";
+            $rand_pd = $insert_od_data->query($sql_pd);
+            $pd_id[$i] = $rand_pd[0]["product_num"];
+            //生成产品ID
+
             $sql_ct = "select customer_num from customer order by rand() limit 1;";
             $rand_ct = $insert_od_data->query($sql_ct);
             $ct_id[$i] = $rand_ct[0]["customer_num"];
@@ -474,27 +513,9 @@ class Index extends Controller
             $rand_num = $this->randFloat();
             $price[$i] = (int)($price_sale[$i] * $rand_num);
             //销售单价
-            $rand_day1 = mt_rand(0,3);
-            $rand_day2 = 0;
-            switch ($rand_day1){
-                case 0:
-                    $rand_day2 = mt_rand(1,9);
-                    break;
-                case 1:
-                    $rand_day2 = mt_rand(0,9);
-                    break;
-                case 2:
-                    $rand_day2 = mt_rand(0,8);
-                    break;
-            }
-            $date[$i] = substr($od_id,2,6) .$rand_day1 .$rand_day2;
-            //销售日期
             $total[$i] = (int)$num[$i] * $price[$i];
             //订单总价
         }
-        $res0 = $insert_od_data->query("select id from `order` order by id desc limit 1");
-//        $res1 = (int)$res0[0]["id"];
-//        $res_new = $res1;
         for ($j=1;$j<=NUM;$j++) {
             $res2 = Order::create([
                 'order_id' => $id[$j],
@@ -507,15 +528,7 @@ class Index extends Controller
                 'order_empolyee_id' => $em_id[$j],
                 'order_total_price' => $total[$j],
             ]);
-//            $res_new++;
         }
-//        if($res_new - $res1 == 10){
-//            echo 1;
-//        }
-//        else{
-//            return false;
-//        }
-
     }
     //订单生成
     public function af_generate(){
@@ -529,4 +542,19 @@ class Index extends Controller
     public function randFloat($min = 0.8, $max = 1) {
         return $min + mt_rand() / mt_getrandmax() * ($max - $min);
     }
+    //随机小数生成
+    function object_to_array($obj) {
+        $obj = (array)$obj;
+        foreach ($obj as $k => $v) {
+            if (gettype($v) == 'resource') {
+                return;
+            }
+            if (gettype($v) == 'object' || gettype($v) == 'array') {
+                $obj[$k] = (array)object_to_array($v);
+            }
+        }
+
+        return $obj;
+    }
+    //对象 转 数组
 }
