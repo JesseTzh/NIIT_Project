@@ -3,6 +3,7 @@
 namespace app\index\model;
 
 use think\Model;
+use think\Session;
 
 class Order extends Model {
 		    //新增
@@ -42,8 +43,20 @@ class Order extends Model {
     }
 	    //列表
     public function lists($request, $itemNum = 12){	//每页显示12条数据
-        $condition = $request->param('condition');
-        return $this->where(json_decode($condition))->paginate($itemNum);
+        if(session('employee_character_num')>1){
+            return $this->where("order_empolyee_id","=",session('employee_num'))->paginate($itemNum);
+        }else if(session('employee_character_num')==1){
+            //select a.* from `order` a inner join employee b on a.order_empolyee_id = b.employee_num where b.employee_department_num = 7;
+            return $this
+                ->table('order')
+                ->alias('a')
+                ->field('a.*')
+                ->join('employee b','a.order_empolyee_id=b.employee_num')
+                ->where("b.employee_department_num","=",session('employee_department_num'))->paginate($itemNum);
+        }else{
+            $condition = $request->param('condition');
+            return $this->where(json_decode($condition))->paginate($itemNum);
+        }
     }
 
 }	
