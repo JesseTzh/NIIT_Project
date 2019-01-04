@@ -1,16 +1,18 @@
 <?php
 namespace app\insert_data\controller;
 
+use app\insert_data\model\After_sale;
 use app\insert_data\model\Employee;
 use app\insert_data\model\Order;
 use app\insert_data\model\Product;
 use app\insert_data\model\Record;
-use think\Controller;
-use Faker;
 use app\insert_data\model\Customer;
+use think\Controller;
 use think\Db;
+use Faker;
 
-define('NUM',100);
+
+define('NUM',10);
 
 class Index extends Controller
 {
@@ -389,7 +391,7 @@ class Index extends Controller
             $img[$i] = $faker->imageUrl($width = 640, $height = 480);
         }
         for ($i=1;$i<=NUM;$i++){
-            $ch_num[$i] = mt_rand(1,3);
+            $ch_num[$i] = mt_rand(2,3);
         }
         for ($i=1;$i<=NUM;$i++){
             $de_num[$i] = mt_rand(1,9);
@@ -531,15 +533,103 @@ class Index extends Controller
         }
     }
     //订单生成
-    public function af_generate(){
+    public function sv_generate(){
+        $insert_sv_data = new After_sale;
+        $faker = Faker\Factory::create();
+        //针对某一订单生成日期售后服务单号
+        for ($i=1;$i<=NUM;$i++){
+            $sql_od_id = "select order_id from `order` order by rand() limit 1;";
+            $rand_od = $insert_sv_data->query($sql_od_id);
+            $od_id[$i] = $rand_od[0]["order_id"];
+            //随机取得订单ID
+            $sql_od_date = "select order_date from `order` where order_id = '".$od_id[$i]."';";
+            $od_date_sql = $insert_sv_data->query($sql_od_date);
+            $od_date_arr[$i] = $od_date_sql[0]["order_date"];
+            //取得对应订单日期
+            $sv_date_fake = $faker->dateTimeBetween($startDate = $od_date_arr[$i], $endDate = 'now', $timezone = null);
+            $sv_date_str = $this->object_to_array($sv_date_fake);
+            $sv_date[$i] = substr($sv_date_str['date'],0,4) .substr($sv_date_str['date'],5,2) .substr($sv_date_str['date'],8,2);
+            //随机生成订单日期至今的一天作为服务单生成日期
+            $sql1 = 'max(cast(right(after_sale_id,5) as  UNSIGNED))';
+            $sql = "select ".$sql1."  from `after_sale`;";
+            $last = $insert_sv_data->query($sql);
+            if($last[0][$sql1] == null){
+                $sv_num=1;
+            }
+            else{
+                $sv_num=$last[0][$sql1]+1;
+            }
+            $zero = 0;
+            $num_len = strlen($sv_num);
+            for ($j = 5 - $num_len; $j > 1; $j--) {
+                $zero .= "0";
+            }
+            $id[$i] = "SV" . substr($sv_date[$i],0,6) .$zero .$sv_num;
+            $sv_num+1;
+            //售后服务单ID生成
+            $sv_type = mt_rand(1,4);
+            switch ($sv_type){
+                case 1:
+                    $type[$i] = "质量问题";
+                    break;
+                case 2:
+                    $type[$i] = "品控问题";
+                    break;
+                case 3:
+                    $type[$i] = "其他";
+                    break;
+                case 4:
+                    $type[$i] = "客户个人原因";
+                    break;
+            }
+            //生成售后问题分类
+            $sv_details = mt_rand(1,4);
+            switch ($sv_details){
+                case 1:
+                    $details[$i] = "质量问题，无法运行并伴有电闪雷鸣";
+                    break;
+                case 2:
+                    $details[$i] = "发生自燃，并确定附近没有微波设备加热";
+                    break;
+                case 3:
+                    $details[$i] = "老婆发现后拿命相逼让我退货";
+                    break;
+                case 4:
+                    $details[$i] = "我就是不想用了你看着办吧";
+                    break;
+            }
+            //生成售后问题详情
+            $sv_em_sql = "select employee_num from employee where employee_character_num=3 order by rand() limit 1;";
+            $rand_em = $insert_sv_data->query($sv_em_sql);
+            $em_id[$i] = $rand_em[0]["employee_num"];
+            //随机抽取售后负责人
+        }
+        dump($od_id);//打印对应订单ID
+        dump($od_date_arr);//打印对应订单日期
+        dump($sv_date);//打印售后服务单产生日期
+        dump($id);//打印售后服务单ID
+        dump($type);//打印售后问题分类
+        dump($details);//打印售后问题详情
+        dump($em_id);//打印售后负责人员ID
 
+        for ($j=1;$j<=NUM;$j++) {
+            $res = After_sale::create([
+                'after_sale_id' => $id[$j],
+                'after_sale_order_id' => $od_id[$j],
+                'after_sale_type' => $type[$j],
+                'after_sale_details' => $details[$j],
+                'after_sale_empolyee_id' => $em_id[$j],
+                'after_sale_date' => $sv_date[$j],
+                'after_sale_state' => "办理中",
+            ]);
+        }
     }
     //售后服务单生成
     public function fe_generate(){
 
     }
     //售后反馈单生成
-    public function randFloat($min = 0.8, $max = 1) {
+    public function randFloat($min = 0.95, $max = 1) {
         return $min + mt_rand() / mt_getrandmax() * ($max - $min);
     }
     //随机小数生成
