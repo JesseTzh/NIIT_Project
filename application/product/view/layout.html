@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="/assets/css/app.css">
     <script src="/assets/js/jquery.min.js"></script>
 </head>
-<body>
 
 <body data-type="index">
     <script src="/assets/js/theme.js"></script>
@@ -198,6 +197,31 @@
     <script src="/assets/js/amazeui.datetimepicker.min.js"></script>
     <script src="/assets/js/locales/amazeui.datetimepicker.zh-CN.js" type="text/javascript" charset="UTF-8"></script>
     <script src="/assets/js/app.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
 </body>
-</body>
+<!--<script type="text/javascript">-->
+    <!--function onClickEvent(event) {-->
+        <!--var sort_name = event.srcElement.innerHTML;-->
+        <!--$.ajax(-->
+            <!--{-->
+            <!--url:" {:url('product/controller/sortList')}",-->
+            <!--data:{-->
+                <!--'productname':sort_name-->
+            <!--},-->
+            <!--dataType:'json',-->
+            <!--type:'post',-->
+            <!--success:function (data) {-->
+                <!--alert(data);-->
+            <!--}-->
+        <!--})-->
+        <!--// $.post('product/controller/product/sort', {'productname': sort_name}, function(res){-->
+        <!--//     //回调函数-->
+        <!--//     var resalt = JSON.parse(res);-->
+        <!--//-->
+        <!--// })-->
+
+
+    <!--}-->
+<!--</script>-->
 </html>

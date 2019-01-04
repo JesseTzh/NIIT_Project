@@ -4,6 +4,7 @@
 namespace app\product\controller;
 
 use think\Controller;
+use think\Request;
 
 class Product extends Controller{
 	protected $model = null;
@@ -72,13 +73,17 @@ class Product extends Controller{
 		$productList = $this->model->lists($this->request, 12);	
 		$this->assign('productList', $productList);
 		return $this->fetch();
-	}
+//        return $this->where(json_decode($productList))->paginate(12);
+
+    }
     public function sort(){
-        return $this->fetch();
+        return $this->fetch('sort');
     }
-    public function getPost(){
-	    $request = request();
-	    $result = $request->post();
-	    dump($result);
-    }
+    public function sortlist(){
+	    $sortname = $_POST['productname'];
+        $product_name = $this->model->sortLists($sortname);
+//        $this->ajaxReturn($product_name);
+        echo json_encode($product_name);
+        }
+
 }

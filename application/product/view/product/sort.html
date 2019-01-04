@@ -1,21 +1,73 @@
+
 {extend name="layout" /}
 {block name="content"}
 <div class="tpl-content-wrapper">
 <div data-am-widget="tabs"
      class="am-tabs am-tabs-d2"
 >
-    <ul class="am-tabs-nav am-cf" >
-        <li class="am-active"><a href="[data-tab-panel-0]" method="get">电视</a></li>
-        <li class=""><a href="[data-tab-panel-1]">冰箱</a></li>
-        <li class=""><a href="[data-tab-panel-2]">空调</a></li>
-        <li class=""><a href="[data-tab-panel-3]">洗衣机</a></li>
-        <li class=""><a href="[data-tab-panel-4]">厨卫大电</a></li>
-        <li class=""><a href="[data-tab-panel-5]">厨房小电</a></li>
-        <li class=""><a href="[data-tab-panel-6]">生活电器</a></li>
-        <li class=""><a href="[data-tab-panel-7]">个护健康</a></li>
-        <li class=""><a href="[data-tab-panel-8]">家庭影院</a></li>
+    <ul class="am-tabs-nav am-cf pro_list" id="sort_name" onClick="show()">
+        <li class="am-active"><a href="[data-tab-panel-0]" id="television" >电视</a></li>
+        <li class=""><a href="[data-tab-panel-1]" id="refrigerator">冰箱</a></li>
+        <li class=""><a href="[data-tab-panel-2]" id="a_conditioner">空调</a></li>
+        <li class=""><a href="[data-tab-panel-3]" id="w_machine">洗衣机</a></li>
+        <li class=""><a href="[data-tab-panel-4]" id="kt_elec">厨卫大电</a></li>
+        <li class=""><a href="[data-tab-panel-5]" id="k_elec">厨房小电</a></li>
+        <li class=""><a href="[data-tab-panel-6]" id="l_elec">生活电器</a></li>
+        <li class=""><a href="[data-tab-panel-7]" id="hc">个护健康</a></li>
+        <li class=""><a href="[data-tab-panel-8]" id="ht">家庭影院</a></li>
 
     </ul>
+
+    <script type="text/javascript">
+        // function onClickEvent(event) {
+        //     var sort_name = event.srcElement.innerHTML;
+        //     $.ajax(
+        //         {
+        //             url:" {:url('product/controller/sortList')}",
+        //             data:{
+        //                 'productname':sort_name
+        //             },
+        //             dataType:'json',
+        //             type:'post',
+        //             success:function (data) {
+        //                 alert(data);
+        //             }
+        //         })
+        //     // $.post('product/controller/product/sort', {'productname': sort_name}, function(res){
+        //     //     //回调函数
+        //     //     var resalt = JSON.parse(res);
+        //     //
+        //     // })
+        //
+        //
+        // }
+
+        function show(){
+            $(".pro_list li a").click(function(){
+                var sort_name = $(this).text();
+                // alert(sort_name);
+                // $.ajax({
+                //             url:"sortlist",
+                //             data:{
+                //                 'productname':sort_name
+                //             },
+                //             dataType:'json',
+                //             type:'post',
+                //             success:function (data) {
+                //                 alert(data);
+                //             }
+                //         })
+
+                $.post('sortlist', {'productname': sort_name}, function(res){
+                //回调函数
+                var resalt = JSON.parse(res);
+                alert(resalt);
+                })
+            })
+        }
+    </script>
+
+
     <div class="am-tabs-bd">
         <div data-tab-panel-0 class="am-tab-panel am-active">
             <div class="am-u-sm-12">
@@ -33,6 +85,19 @@
                         <th>操作</th>
                     </tr>
                     </thead>
+                    <tbody>
+
+                    <tr class="gradeX">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td></tr>
+                    </tbody>
                 </table>
             </div>
         </div>

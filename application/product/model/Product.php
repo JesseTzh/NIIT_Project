@@ -3,6 +3,7 @@
 namespace app\product\model;
 
 use think\Model;
+use think\Request;
 
 class Product extends Model {
 		    //新增
@@ -37,7 +38,7 @@ class Product extends Model {
     }
 	    //id单个查询
     public function info($request){
-        $id = $request->param('id');		
+        $id = $request->param('id');
         return $this->where('id', $id)->find();
     }
 	    //列表
@@ -48,6 +49,13 @@ class Product extends Model {
     //显示分类
     public function sort(){
         return $this->view('sort');
+    }
+
+    public function sortLists($sortname){
+//            $product_name = $_POST('sortname');
+            return $this->where('product_main_type',$sortname);
+//            dump($this->where('product_main_type',$product_name));
+//        }
     }
 
 }	
