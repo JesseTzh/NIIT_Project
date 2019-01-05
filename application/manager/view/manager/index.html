@@ -67,6 +67,60 @@
                     </div>
                     <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="total_sell_for_year">
                         <!--年度销售额折线图-->
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                var dom = document.getElementById('total_sell_for_year');
+                                //初始化echart
+                                var chart = echarts.init(dom);
+                                //制定配置项
+                                var option = {
+                                    tooltip: {
+                                        //鼠标移动显示图例
+                                        trigger: 'axis'
+                                    },
+                                    grid: {
+                                        //绘制
+                                        top: '3%',
+                                        left: '3%',
+                                        right: '4%',
+                                        bottom: '3%',
+                                        containLabel: true
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        boundaryGap: false,
+                                        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                                    },
+                                    yAxis: {
+                                        type: 'value'
+                                    },
+                                    textStyle: {
+                                        color: '#838FA1'
+                                    },
+                                    series: [{
+                                        name: '年度销售总额',
+                                        data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                                        type: 'line',
+                                        areaStyle: {normal: {}},
+                                        itemStyle: {
+                                            normal: {
+                                                color: '#1cabdb',
+                                                borderColor: '#1cabdb',
+                                                borderWidth: '2',
+                                                borderType: 'solid',
+                                                opacity: '1'
+                                            },
+                                            emphasis: {
+
+                                            }
+                                        }
+                                    }]
+                                };
+
+                                //创建图表
+                                chart.setOption(option);
+                            })
+                        </script>
                     </div>
                 </div>
             </div>
