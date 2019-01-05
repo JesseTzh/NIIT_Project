@@ -41,9 +41,20 @@ class Feedback extends Model {
         return $this->where('id', $id)->find();
     }
 	    //列表
-    public function lists($request, $itemNum = 12){	//每页显示12条数据
-        $condition = $request->param('condition');
-        return $this->where(json_decode($condition))->paginate($itemNum);
+    public function lists($request, $itemNum = 12)
+    {    //每页显示12条数据
+        $condition = session('employee_num');
+        $num = session('employee_character_num');
+        $depart_num = session('employee_department_num');
+        $kz = $request->param
+        ('condition');
+        //dump($depart_num);
+        if ($num == 0)
+            return $this->where(json_decode($kz))->paginate($itemNum);
+        else if ($depart_num >= 1 && $depart_num <= 9)
+            return $this->where('feedback_department', $depart_num)->paginate($itemNum);
+        else
+            return $this->where('feedback_after_sale_empolyee', $condition)->paginate($itemNum);
     }
 
 }	
