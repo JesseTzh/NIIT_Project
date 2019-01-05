@@ -292,6 +292,7 @@ class Index extends Controller
 //        dump($sale);
 //        dump($unit);
 //        dump($detail);
+
         for ($j=1;$j<=NUM;$j++) {
             $res = Product::create([
                 'product_num' => $id[$j],
@@ -444,9 +445,9 @@ class Index extends Controller
             //生成雇员ID
             $de_num_sql = "select employee_department_num from employee where employee_num='".$em_id[$i]."';";
             $de_num_ob = $insert_od_data->query($de_num_sql);
-            $de_num = $de_num_ob[0]["employee_department_num"];
+            $de_num[$i] = $de_num_ob[0]["employee_department_num"];
             $de[$i] = 0;
-            switch ($de_num){
+            switch ($de_num[$i]){
                 case 1:
                     $de[$i] = "电视";
                     break;
@@ -529,6 +530,7 @@ class Index extends Controller
                 'order_unit_price' => $price[$j],
                 'order_empolyee_id' => $em_id[$j],
                 'order_total_price' => $total[$j],
+                'order_department' => $de_num[$j],
             ]);
         }
     }
@@ -542,6 +544,10 @@ class Index extends Controller
             $rand_od = $insert_sv_data->query($sql_od_id);
             $od_id[$i] = $rand_od[0]["order_id"];
             //随机取得订单ID
+            $sql_od_de = "select order_department from `order` where order_id = '".$od_id[$i]."';";
+            $od_de_sql = $insert_sv_data->query($sql_od_de);
+            $od_de[$i] = $od_de_sql[0]["order_department"];
+            //根据提取订单对应部门
             $sql_od_date = "select order_date from `order` where order_id = '".$od_id[$i]."';";
             $od_date_sql = $insert_sv_data->query($sql_od_date);
             $od_date_arr[$i] = $od_date_sql[0]["order_date"];
@@ -599,12 +605,13 @@ class Index extends Controller
                     break;
             }
             //生成售后问题详情
-            $sv_em_sql = "select employee_num from employee where employee_character_num=3 order by rand() limit 1;";
+            $sv_em_sql = "select employee_num from employee where employee_character_num=3 and employee_department_num = '".$od_de[$i]."' order by rand() limit 1;";
             $rand_em = $insert_sv_data->query($sv_em_sql);
             $em_id[$i] = $rand_em[0]["employee_num"];
-            //随机抽取售后负责人
+            //随机从对应部门抽取售后负责人
         }
         dump($od_id);//打印对应订单ID
+        dump($od_de);//打印订单对应部门编号
         dump($od_date_arr);//打印对应订单日期
         dump($sv_date);//打印售后服务单产生日期
         dump($id);//打印售后服务单ID
@@ -621,6 +628,7 @@ class Index extends Controller
                 'after_sale_empolyee_id' => $em_id[$j],
                 'after_sale_date' => $sv_date[$j],
                 'after_sale_state' => "办理中",
+                'after_sale_department' => $od_de[$j],
             ]);
         }
     }
