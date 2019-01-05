@@ -10,6 +10,9 @@ namespace app\manager\controller;
 use think\Controller;
 use think\Session;
 use app\common\controller\IsLogin;
+use app\index\controller\Customer;
+use app\employee\controller\Employee;
+use app\index\controller\Order;
 
 class Manager extends Controller{
     public function show(){
@@ -37,5 +40,23 @@ class Manager extends Controller{
             //未登录，跳转登录页面
             $this->redirect('login/login/index');
         }
+    }
+
+    public function manager_customer(){
+//        return $this->fetch('admin');
+//        dump(config());
+        $customer = new Customer;
+        $customerList = $customer->lists_val();
+        $this->assign('customerList', $customerList);
+        return $this->fetch('manager_customer');
+    }
+
+    public function manager_order(){
+//        return $this->fetch('admin');
+//        dump(config());
+        $order = new Order;
+        $orderlist = $order->lists_val();
+        $this->assign('orderList', $orderlist);
+        return $this->fetch('manager_order');
     }
 }
