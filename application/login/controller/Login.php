@@ -41,7 +41,11 @@ class Login extends Controller{
 //               $this->redirect('index/Customer/lists');
                switch ($employee_character_num){
                    case 0:
+                       //系统管理员
                        $this->redirect('admin/admin/index');
+                   case 1:
+                       //部门经理
+                       $this->redirect('manager/manager/show');
                    //留空等待补充
                }
            }

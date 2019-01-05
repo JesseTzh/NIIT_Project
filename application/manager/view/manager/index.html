@@ -1,16 +1,164 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome!</title>
-</head>
-<body>
-    <h1>！登！录！成！功！</h1>
-    <br>
-    <h3>这是经理界面</h3>
-    <br>
-    <h5>员工ID：{$employee_num}</h5>
-    <br>
-    <h5>部门ID：{$employee_character_num}</h5>
-</body>
-</html>
+{extend name='layout'/}
+{block name='content'}
+<!--主要内容-->
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row  am-cf">
+            <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
+                <div class="widget widget-primary am-cf" style="background: orange">
+                    <div class="widget-statistic-header" style="color: whitesmoke">
+                        本月度利润
+                    </div>
+                    <div class="widget-statistic-body">
+                        <div class="widget-statistic-value" style="color: whitesmoke">
+                            ￥27,294
+                        </div>
+                        <div class="widget-statistic-description" style="color: whitesmoke">
+                            Whatever is worth doing is worth doing well.
+                        </div>
+                        <span class="widget-statistic-icon am-icon-cubes" style="color: rgba(255,255,255,0.3)"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
+                <div class="widget widget-primary am-cf">
+                    <div class="widget-statistic-header">
+                        本季度利润
+                    </div>
+                    <div class="widget-statistic-body">
+                        <div class="widget-statistic-value">
+                            ￥27,294
+                        </div>
+                        <div class="widget-statistic-description">
+                            Whatever is worth doing is worth doing well.
+                        </div>
+                        <span class="widget-statistic-icon am-icon-credit-card-alt"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
+                <div class="widget widget-purple am-cf">
+                    <div class="widget-statistic-header">
+                        本季度总销售额
+                    </div>
+                    <div class="widget-statistic-body">
+                        <div class="widget-statistic-value">
+                            ￥27,294
+                        </div>
+                        <div class="widget-statistic-description">
+                            Whatever is worth doing is worth doing well.
+                        </div>
+                        <span class="widget-statistic-icon am-icon-support"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row am-cf">
+            <div class="am-u-sm-12 am-u-md-8">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">年度销售额</div>
+                        <div class="widget-function am-fr">
+                            <!--<a href="javascript:;" class="am-icon-cog"></a>-->
+                            <i class="am-icon-gear am-icon-spin"></i>
+                        </div>
+                    </div>
+                    <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="total_sell_for_year">
+                        <!--年度销售额折线图-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-sm-12 am-u-md-4">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">先定一个小目标</div>
+                        <div class="widget-function am-fr">
+                            <!--<a href="javascript:;" class="am-icon-cog"></a>-->
+                            <i class="am-icon-gear am-icon-spin"></i>
+                        </div>
+                    </div>
+                    <div class="widget-body widget-body-md am-fr">
+
+                        <div class="am-progress-title">月度目标<span class="am-fr am-progress-title-more">28% / 100%</span></div>
+                        <div class="am-progress">
+                            <div class="am-progress-bar" style="width: 15%"></div>
+                        </div>
+                        <div class="am-progress-title">季度目标<span class="am-fr am-progress-title-more">28% / 100%</span></div>
+                        <div class="am-progress">
+                            <div class="am-progress-bar  am-progress-bar-warning" style="width: 75%"></div>
+                        </div>
+                        <div class="am-progress-title">年度目标<span class="am-fr am-progress-title-more">28% / 100%</span></div>
+                        <div class="am-progress">
+                            <div class="am-progress-bar am-progress-bar-danger" style="width: 35%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row am-cf">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-4 widget-margin-bottom-lg ">
+                <div class="tpl-user-card am-text-center widget-body-lg">
+                    <div class="tpl-user-card-title">
+                        明星员工
+                    </div>
+                    <div class="achievement-subheading">
+                        <!--月度最佳员工-->
+                    </div>
+                    <img class="achievement-image" src="/static/images/faces/face1.jpg" alt="">
+                    <br><br><br>
+                    <div class="achievement-description">
+                        Jason 在
+                        <strong>30天内</strong> 销售额高达
+                        <strong>100</strong>万。
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-8 widget-margin-bottom-lg">
+
+                <div class="widget am-cf widget-body-lg">
+
+                    <div class="widget-body  am-fr">
+                        <div class="am-scrollable-horizontal ">
+                            <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black " id="example-r">
+                                <thead>
+                                <tr>
+                                    <th>员工ID</th>
+                                    <th>员工姓名</th>
+                                    <th>月度销售额</th>
+                                    <th>点赞</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="gradeX">
+                                    <td>EM00001</td>
+                                    <td>Jason</td>
+                                    <td>￥1000000+</td>
+                                    <td>
+                                        <div class="tpl-table-black-operation">
+                                            <a href="">
+                                                <i class="am-icon-thumbs-o-up"></i> 编辑
+                                            </a>
+                                            <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                                <!--<i class="am-icon-trash"></i> 删除-->
+                                            <!--</a>-->
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- more data -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
