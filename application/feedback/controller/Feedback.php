@@ -73,4 +73,10 @@ class Feedback extends Controller{
 		$this->assign('feedbackList', $feedbackList);
 		return $this->fetch();
 	}
+
+    public function lists_val(){
+        $feedbackList = $this->model->lists($this->request, 12);
+//        $this->assign('feedbackList', $feedbackList);
+        return $feedbackList;
+    }
 }

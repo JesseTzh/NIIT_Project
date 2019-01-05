@@ -24,7 +24,7 @@ class Login extends Controller{
             return $this->fetch('index');
         }
         else{
-            $tmp = \session('employee_num');
+            $tmp = \session('employee_character_num');
             switch ($tmp){
                 case 0:
                     //系统管理员

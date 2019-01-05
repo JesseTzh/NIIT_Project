@@ -13,6 +13,8 @@ use app\common\controller\IsLogin;
 use app\index\controller\Customer;
 use app\employee\controller\Employee;
 use app\index\controller\Order;
+use app\aftersale\controller\AfterSale;
+use app\feedback\controller\Feedback;
 
 class Manager extends Controller{
     public function show(){
@@ -58,5 +60,29 @@ class Manager extends Controller{
         $orderlist = $order->lists_val();
         $this->assign('orderList', $orderlist);
         return $this->fetch('manager_order');
+    }
+
+    public function manager_employee(){
+        //员工管理
+        $employee = new Employee;
+        $employeerList = $employee->lists_val();
+        $this->assign('employeeList', $employeerList);
+        return $this->fetch('manager_employee');
+    }
+
+    public function manager_aftersale(){
+        //员工管理
+        $after_sale = new AfterSale;
+        $after_List = $after_sale->lists_val();
+        $this->assign('after_saleList', $after_List);
+        return $this->fetch('manager_aftersale');
+    }
+
+    public function manager_feedback(){
+        //员工管理
+        $feedback = new Feedback;
+        $feedback_List = $feedback->lists_val();
+        $this->assign('feedbackList', $feedback_List);
+        return $this->fetch('manager_feedback');
     }
 }

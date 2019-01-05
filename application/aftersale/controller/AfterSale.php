@@ -73,5 +73,11 @@ class AfterSale extends Controller{
 		$this->assign('after_saleList', $after_saleList);
 		return $this->fetch();
 	}
+
+    public function lists_val(){
+        $after_saleList = $this->model->lists($this->request, 12);
+//        $this->assign('after_saleList', $after_saleList);
+        return $after_saleList;
+    }
 }
 

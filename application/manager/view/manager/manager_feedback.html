@@ -7,18 +7,16 @@
 						<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
 								<div class="widget am-cf">
 										<div class="widget-head am-cf">
-												<div class="widget-title  am-cf">订单管理</div>
+												<div class="widget-title  am-cf">管理feedback</div>
 										</div>
 										<div class="widget-body  am-fr">
 	<div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
 		<div class="am-form-group">
 			<div class="am-btn-toolbar">
 				<div class="am-btn-group am-btn-group-xs">
-					<a class="am-btn am-btn-default am-btn-success" href="{:url('order/add')}">
+					<a class="am-btn am-btn-default am-btn-success" href="{:url('feedback/add')}">
 						<span class="am-icon-plus"></span> 新增
 					</a>
-					<button type="button" class="am-btn  am-btn-default"><a href="/index/office/upload.html"><span class="am-icon-save"></span> 导入Excel</button></a>
-					<button type="button" class="am-btn am-btn-default"><a href="/static/order.xlsx"><span class="am-icon-archive"></span> 下载excel模板 </button></a>
 					<!--
 					<button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>
 					<button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 审核</button>
@@ -32,36 +30,32 @@
 		<table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
 				<thead>
 					<tr>
-												<th>编号</th>
-												<th>订单编号</th>
-												<th>产品id</th>
-												<th>客户id</th>
-												<th>渠道</th>
-												<th>数量</th>
-												<th>单价</th>
-												<th>柜员号</th>
-												<th>总价</th>
+												<th>售后反馈单ID</th>
+												<th>售后反馈单编号</th>
+												<th>对应售后服务单编号</th>
+												<th>售后负责人员</th>
+												<th>售后处理方式</th>
+												<th>售后费用</th>
+												<th>处理情况说明</th>
 												<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
-						{volist name="orderList" id="vo"}
+						{volist name="feedbackList" id="vo"}
 						<tr class="gradeX">
 																<td>{$vo.id}</td>
-																<td>{$vo.order_id}</td>
-																<td>{$vo.order_product_id}</td>
-																<td>{$vo.order_customer_id}</td>
-																<td>{$vo.order_channel}</td>
-																<td>{$vo.order_number}</td>
-																<td>{$vo.order_unit_price}</td>
-																<td>{$vo.order_empolyee_id}</td>
-																<td>{$vo.order_total_price}</td>
+																<td>{$vo.feedback_id}</td>
+																<td>{$vo.feedback_after_sale_id}</td>
+																<td>{$vo.feedback_after_sale_empolyee}</td>
+																<td>{$vo.feedback_processing_type}</td>
+																<td>{$vo.feedback_after_sale_cost}</td>
+																<td>{$vo.feedback_situation_description}</td>
 																<td>
 										<div class="tpl-table-black-operation">
-												<a  href="{:url('order/edit', ['id'=>$vo['id']])}">
+												<a  href="{:url('feedback/edit', ['id'=>$vo['id']])}">
 													<i class="am-icon-pencil"></i> 编辑
 												</a>
-												<a href="{:url('order/delete', ['id'=>$vo['id']])}" onclick='return confirm("确定删除吗？")' class="tpl-table-black-operation-del">
+												<a href="{:url('feedback/delete', ['id'=>$vo['id']])}" onclick='return confirm("确定删除吗？")' class="tpl-table-black-operation-del">
 													<i class="am-icon-trash"></i> 删除
 												</a>
 										</div>
@@ -76,7 +70,7 @@
 
 			<div class="am-fr">
 					<ul class="am-pagination tpl-pagination">
-							{$orderList->render()}
+							{$feedbackList->render()}
 					</ul>
 			</div>
 	</div>
