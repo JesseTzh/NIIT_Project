@@ -15,6 +15,7 @@ use app\employee\controller\Employee;
 use app\index\controller\Order;
 use app\aftersale\controller\AfterSale;
 use app\feedback\controller\Feedback;
+use app\statistics\controller\Statistics;
 
 class Manager extends Controller{
     public function show(){
@@ -22,6 +23,12 @@ class Manager extends Controller{
         if(IsLogin::is_login()){
             //已登录
             //显示部门经理页面
+            $monthly_profit = Statistics::department_monthly_profit();
+            $quart_profit = Statistics::department_quarter_profit();
+            $sale_room = Statistics::department_saleroom();
+            $this->assign('monthly_profit', $monthly_profit);
+            $this->assign('quart_profit', $quart_profit);
+            $this->assign('sale_room', $sale_room);
             return $this->fetch('index');
         }
         else{

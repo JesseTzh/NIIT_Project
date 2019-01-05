@@ -20,7 +20,7 @@ class Statistics extends Controller
 
     static public function department_monthly_profit()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT sum(tmp.order_total_price-tmp.order_number*a.product_cost) as 利润
         FROM product a 
@@ -36,12 +36,11 @@ class Statistics extends Controller
         $res = $sql_res[0]["利润"];
         //查询特定员工本月利润,员工编码即为$sql_se
         return $res;
-        //如果是只返回一个数字的话
     }//本部门月利润
 
     static public function department_quarter_profit()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT sum(tmp.order_total_price-tmp.order_number*a.product_cost) as 利润
         FROM product a 
@@ -61,7 +60,7 @@ class Statistics extends Controller
 
     static public function department_saleroom()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "select SUM(order_total_price) as saleroom FROM `order` 
         where order_date BETWEEN '2017-12-31' AND '2018-12-31' AND
@@ -81,7 +80,7 @@ class Statistics extends Controller
 
     static public function department_sale_chart()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT 
         SUM(order_total_price) as total_price,
@@ -107,7 +106,7 @@ class Statistics extends Controller
     }//按月分的销售额表
     static public function department_goal()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT sum(order_total_price) as total,floor(sum(order_total_price)*1.2) as goal
         FROM `order` 
@@ -136,7 +135,7 @@ class Statistics extends Controller
     }//月季年目标销售额
     static public function department_star_employee()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT (a.employee_name)as 明星 from employee a
         RIGHT JOIN
@@ -159,7 +158,7 @@ class Statistics extends Controller
     }//本部门明星员工
     static public function department_employee_top5()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT a.employee_num,(a.employee_name)as 明星 ,tmp.total from employee a
         RIGHT JOIN
@@ -185,7 +184,7 @@ class Statistics extends Controller
     //部门经理和公司的分界线
     static public function company_product_top5()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT (a.product_name)产品名称,tmp.总销售额 from product a
         RIGHT JOIN
@@ -204,7 +203,7 @@ class Statistics extends Controller
     }//产品销量前五
     static public function company_product_last5()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT (a.product_name)产品名称,tmp.总销售额 from product a
         RIGHT JOIN
@@ -223,7 +222,7 @@ class Statistics extends Controller
     }//产品销量后5
     static public function comppany_chart()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT order_channel,SUM(order_total_price)AS 销售额
         from `order`
@@ -241,7 +240,7 @@ class Statistics extends Controller
     }//不同销售渠道订单量图标
     static public function feedback()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "select (feedback_processing_type) as 形式,COUNT(*) as total 
         FROM feedback
@@ -259,7 +258,7 @@ class Statistics extends Controller
     }//饼图
     static public function company_star_product()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT (a.product_name) as 产品名称
         FROM product a
@@ -279,7 +278,7 @@ class Statistics extends Controller
     }//本公司明星产品
     static public function defective_product_top()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT (a.product_name) as 产品名称,(tmp.total)as 问题订单数
         FROM product a
@@ -301,7 +300,7 @@ class Statistics extends Controller
     }//问题产品最多5个
     static public function defective_product_last()
     {
-        $sql_se = \session('department_num');
+        $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
         $sql = "SELECT (a.product_name) as 产品名称,(tmp.total)as 问题订单数
         FROM product a
