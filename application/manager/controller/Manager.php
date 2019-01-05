@@ -17,11 +17,21 @@ class Manager extends Controller{
         if(IsLogin::is_login()){
             //已登录
             //显示部门经理页面
-            $employee_num = \session('employee_num');
-            $employee_character_num = \session('employee_character_num');
-            $this->assign('employee_num', $employee_num);
-            $this->assign('employee_character_num', $employee_character_num);
             return $this->fetch('index');
+        }
+        else{
+            //未登录，跳转登录页面
+            $this->redirect('login/login/index');
+        }
+    }
+
+    public function product_dashboard(){
+        //产品报表页面
+        //调用公共函数，验证是否登录
+        if(IsLogin::is_login()){
+            //已登录
+            //显示产品报表页面
+            return $this->fetch('product_dashboard');
         }
         else{
             //未登录，跳转登录页面

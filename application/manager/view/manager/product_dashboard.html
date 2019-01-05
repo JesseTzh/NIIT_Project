@@ -1,0 +1,459 @@
+{extend name='layout'/}
+{block name='content'}
+    <div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row am-cf">
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="widget am-cf widget-body-lg" style="background: #0a628f">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">销量top 5</div>
+                        <div class="widget-function am-fr">
+                            <!--<a href="javascript:;" class="am-icon-cog"></a>-->
+                            <i class="am-icon-gear am-icon-spin"></i>
+                        </div>
+                    </div>
+                    <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="sell_top_five">
+                        <!--销量前五的产品表格-->
+                        <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black" id="sell_top_five_table">
+                            <thead>
+                            <tr>
+                                <th>员工ID</th>
+                                <th>员工姓名</th>
+                                <th>月度销售额</th>
+                                <th>点赞</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- more data -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="widget am-cf widget-body-lg" style="background: rebeccapurple">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">销量bottom 5</div>
+                        <div class="widget-function am-fr">
+                            <!--<a href="javascript:;" class="am-icon-cog"></a>-->
+                            <i class="am-icon-gear am-icon-spin"></i>
+                        </div>
+                    </div>
+                    <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="sell_bottom_five">
+                        <!--销量后五的产品表格-->
+                        <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black " id="sell_bottom_five_table">
+                            <thead>
+                            <tr>
+                                <th>员工ID</th>
+                                <th>员工姓名</th>
+                                <th>月度销售额</th>
+                                <th>点赞</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- more data -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row am-cf">
+            <div class="am-u-sm-12 am-u-md-8">
+                <div class="widget am-cf widget-body-lg">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">不同渠道订单量</div>
+                        <div class="widget-function am-fr">
+                            <!--<a href="javascript:;" class="am-icon-cog"></a>-->
+                            <i class="am-icon-gear am-icon-spin"></i>
+                        </div>
+                    </div>
+                    <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="different_channel_order">
+                        <!--不同渠道订单量（柱状图）-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-sm-12 am-u-md-4">
+                <div class="widget am-cf widget-body-lg">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">售后情况</div>
+                        <div class="widget-function am-fr">
+                            <!--<a href="javascript:;" class="am-icon-cog"></a>-->
+                            <i class="am-icon-gear am-icon-spin"></i>
+                        </div>
+                    </div>
+                    <div class="widget-body widget-body-md am-fr">
+
+                        <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="different_type_aftersale">
+                            <!--不同类型售后处理订单数量-->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row am-cf">
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="widget am-cf widget-body-lg" style="background: #0a628f">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">销量top 5</div>
+                        <div class="widget-function am-fr">
+                            <!--<a href="javascript:;" class="am-icon-cog"></a>-->
+                            <i class="am-icon-gear am-icon-spin"></i>
+                        </div>
+                    </div>
+                    <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="problem_top_five">
+                        <!--销量前五的产品表格-->
+                        <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black " id="problem_top_five_table">
+                            <thead>
+                            <tr>
+                                <th>员工ID</th>
+                                <th>员工姓名</th>
+                                <th>月度销售额</th>
+                                <th>点赞</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- more data -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-sm-12 am-u-md-6">
+                <div class="widget am-cf widget-body-lg" style="background: rebeccapurple">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">销量bottom 5</div>
+                        <div class="widget-function am-fr">
+                            <!--<a href="javascript:;" class="am-icon-cog"></a>-->
+                            <i class="am-icon-gear am-icon-spin"></i>
+                        </div>
+                    </div>
+                    <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="problem_bottom_five">
+                        <!--销量后五的产品表格-->
+                        <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black " id="problem_bottom_five_table">
+                            <thead>
+                            <tr>
+                                <th>员工ID</th>
+                                <th>员工姓名</th>
+                                <th>月度销售额</th>
+                                <th>点赞</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="gradeX">
+                                <td>EM00001</td>
+                                <td>Jason</td>
+                                <td>￥1000000+</td>
+                                <td>
+                                    <div class="tpl-table-black-operation">
+                                        <a href="">
+                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                        </a>
+                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
+                                        <!--<i class="am-icon-trash"></i> 删除-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- more data -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{/block}
