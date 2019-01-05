@@ -1,0 +1,112 @@
+{extend name="layout" /}
+{block name="content"}
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+		<div class="row-content am-cf">
+		<div class="row">
+				<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+								<div class="widget-head am-cf">
+										<div class="widget-title am-fl">编辑order</div>
+										<div class="widget-function am-fr">
+												<a href="javascript:;" class="am-icon-cog"></a>
+										</div>
+								</div>
+								<div class="widget-body am-fr">
+										<form class="am-form tpl-form-border-form" method="post">
+	 
+	<input type="hidden" name="id" value="{$order.id}" />
+		<div class="am-form-group">
+			<label for="order_id" class="am-u-sm-12 am-form-label am-text-left">订单编号					<span class="tpl-form-line-small-title">order_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_id)"}{$order.order_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_id" name="order_id" 
+	placeholder="请输入订单编号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_product_id" class="am-u-sm-12 am-form-label am-text-left">产品id					<span class="tpl-form-line-small-title">order_product_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_product_id)"}{$order.order_product_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_product_id" name="order_product_id" 
+	placeholder="请输入产品id">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_customer_id" class="am-u-sm-12 am-form-label am-text-left">客户id					<span class="tpl-form-line-small-title">order_customer_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_customer_id)"}{$order.order_customer_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_customer_id" name="order_customer_id" 
+	placeholder="请输入客户id">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_date" class="am-u-sm-12 am-form-label am-text-left">订单日期					<span class="tpl-form-line-small-title">order_date</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_date)"}{$order.order_date}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_date" name="order_date" 
+	placeholder="请输入订单日期">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_channel" class="am-u-sm-12 am-form-label am-text-left">订单渠道					<span class="tpl-form-line-small-title">order_channel</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_channel)"}{$order.order_channel}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_channel" name="order_channel" 
+	placeholder="请输入订单渠道">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_number" class="am-u-sm-12 am-form-label am-text-left">订单数量					<span class="tpl-form-line-small-title">order_number</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_number)"}{$order.order_number}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_number" name="order_number" 
+	placeholder="请输入订单数量">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_unit_price" class="am-u-sm-12 am-form-label am-text-left">单价					<span class="tpl-form-line-small-title">order_unit_price</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_unit_price)"}{$order.order_unit_price}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_unit_price" name="order_unit_price" 
+	placeholder="请输入单价">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_empolyee_id" class="am-u-sm-12 am-form-label am-text-left">销售人员					<span class="tpl-form-line-small-title">order_empolyee_id</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_empolyee_id)"}{$order.order_empolyee_id}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_empolyee_id" name="order_empolyee_id" 
+	placeholder="请输入销售人员">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_total_price" class="am-u-sm-12 am-form-label am-text-left">总价					<span class="tpl-form-line-small-title">order_total_price</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_total_price)"}{$order.order_total_price}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_total_price" name="order_total_price" 
+	placeholder="请输入总价">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="order_department" class="am-u-sm-12 am-form-label am-text-left">部门					<span class="tpl-form-line-small-title">order_department</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($order.order_department)"}{$order.order_department}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="order_department" name="order_department" 
+	placeholder="请输入部门">			</div>
+	</div>
+		<div class="am-form-group">
+			<div class="am-u-sm-12 am-u-sm-push-12">
+					<button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+			</div>
+	</div>
+</form>
+
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+{/block}

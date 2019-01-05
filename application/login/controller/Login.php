@@ -28,7 +28,7 @@ class Login extends Controller{
             switch ($tmp){
                 case 0:
                     //系统管理员
-                    $this->redirect('admin/admin/index');
+                    $this->redirect('admin/after_sale/index');
                 case 1:
                     //部门经理
                     $this->redirect('manager/manager/show');
@@ -61,7 +61,7 @@ class Login extends Controller{
                     switch ($employee_character_num){
                         case 0:
                             //系统管理员
-                            $this->redirect('admin/admin/index');
+                            $this->redirect('admin/after_sale/index');
                         case 1:
                             //部门经理
                             $this->redirect('manager/manager/show');

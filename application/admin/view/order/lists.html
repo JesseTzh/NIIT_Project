@@ -1,0 +1,91 @@
+{extend name="layout" /}
+{block name="content"}
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+		<div class="row-content am-cf">
+				<div class="row">
+						<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+								<div class="widget am-cf">
+										<div class="widget-head am-cf">
+												<div class="widget-title  am-cf">管理order</div>
+										</div>
+										<div class="widget-body  am-fr">
+	<div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+		<div class="am-form-group">
+			<div class="am-btn-toolbar">
+				<div class="am-btn-group am-btn-group-xs">
+					<a class="am-btn am-btn-default am-btn-success" href="{:url('order/add')}">
+						<span class="am-icon-plus"></span> 新增
+					</a>
+					<!--
+					<button type="button" class="am-btn am-btn-default am-btn-secondary"><span class="am-icon-save"></span> 保存</button>
+					<button type="button" class="am-btn am-btn-default am-btn-warning"><span class="am-icon-archive"></span> 审核</button>
+					<button type="button" class="am-btn am-btn-default am-btn-danger"><span class="am-icon-trash-o"></span> 删除</button>
+					-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="am-u-sm-12">
+		<table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
+				<thead>
+					<tr>
+												<th>编号</th>
+												<th>订单编号</th>
+												<th>产品id</th>
+												<th>客户id</th>
+												<th>订单日期</th>
+												<th>订单渠道</th>
+												<th>订单数量</th>
+												<th>单价</th>
+												<th>销售人员</th>
+												<th>总价</th>
+												<th>部门</th>
+												<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+						{volist name="orderList" id="vo"}
+						<tr class="gradeX">
+																<td>{$vo.id}</td>
+																<td>{$vo.order_id}</td>
+																<td>{$vo.order_product_id}</td>
+																<td>{$vo.order_customer_id}</td>
+																<td>{$vo.order_date}</td>
+																<td>{$vo.order_channel}</td>
+																<td>{$vo.order_number}</td>
+																<td>{$vo.order_unit_price}</td>
+																<td>{$vo.order_empolyee_id}</td>
+																<td>{$vo.order_total_price}</td>
+																<td>{$vo.order_department}</td>
+																<td>
+										<div class="tpl-table-black-operation">
+												<a  href="{:url('order/edit', ['id'=>$vo['id']])}">
+													<i class="am-icon-pencil"></i> 编辑
+												</a>
+												<a href="{:url('order/delete', ['id'=>$vo['id']])}" onclick='return confirm("确定删除吗？")' class="tpl-table-black-operation-del">
+													<i class="am-icon-trash"></i> 删除
+												</a>
+										</div>
+								</td>
+						</tr>
+						{/volist}
+						<!-- more data -->
+				</tbody>
+		</table>
+	</div>
+	<div class="am-u-lg-12 am-cf">
+
+			<div class="am-fr">
+					<ul class="am-pagination tpl-pagination">
+							{$orderList->render()}
+					</ul>
+			</div>
+	</div>
+</div>
+								</div>
+						</div>
+				</div>
+		</div>
+</div>
+{/block}

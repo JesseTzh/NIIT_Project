@@ -1,0 +1,80 @@
+{extend name="layout" /}
+{block name="content"}
+<!-- 内容区域 -->
+<div class="tpl-content-wrapper">
+		<div class="row-content am-cf">
+		<div class="row">
+				<div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+						<div class="widget am-cf">
+								<div class="widget-head am-cf">
+										<div class="widget-title am-fl">编辑employee</div>
+										<div class="widget-function am-fr">
+												<a href="javascript:;" class="am-icon-cog"></a>
+										</div>
+								</div>
+								<div class="widget-body am-fr">
+										<form class="am-form tpl-form-border-form" method="post">
+	 
+	<input type="hidden" name="id" value="{$employee.id}" />
+		<div class="am-form-group">
+			<label for="employee_num" class="am-u-sm-12 am-form-label am-text-left">登陆员工编号					<span class="tpl-form-line-small-title">employee_num</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($employee.employee_num)"}{$employee.employee_num}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="employee_num" name="employee_num" 
+	placeholder="请输入登陆员工编号">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="employee_name" class="am-u-sm-12 am-form-label am-text-left">姓名					<span class="tpl-form-line-small-title">employee_name</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($employee.employee_name)"}{$employee.employee_name}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="employee_name" name="employee_name" 
+	placeholder="请输入姓名">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="employee_password" class="am-u-sm-12 am-form-label am-text-left">员工登陆密码					<span class="tpl-form-line-small-title">employee_password</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($employee.employee_password)"}{$employee.employee_password}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="employee_password" name="employee_password" 
+	placeholder="请输入员工登陆密码">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="employee_head_portrait" class="am-u-sm-12 am-form-label am-text-left">员工头像					<span class="tpl-form-line-small-title">employee_head_portrait</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($employee.employee_head_portrait)"}{$employee.employee_head_portrait}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="employee_head_portrait" name="employee_head_portrait" 
+	placeholder="请输入员工头像">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="employee_character_num" class="am-u-sm-12 am-form-label am-text-left">员工角色代码					<span class="tpl-form-line-small-title">employee_character_num</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($employee.employee_character_num)"}{$employee.employee_character_num}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="employee_character_num" name="employee_character_num" 
+	placeholder="请输入员工角色代码">			</div>
+	</div>
+		<div class="am-form-group">
+			<label for="employee_department_num" class="am-u-sm-12 am-form-label am-text-left">员工部门代码					<span class="tpl-form-line-small-title">employee_department_num</span></label>
+			<div class="am-u-sm-12">
+					<input type="text" 
+	value="{if condition="isset($employee.employee_department_num)"}{$employee.employee_department_num}{/if}"
+	class="tpl-form-input am-margin-top-xs" id="employee_department_num" name="employee_department_num" 
+	placeholder="请输入员工部门代码">			</div>
+	</div>
+		<div class="am-form-group">
+			<div class="am-u-sm-12 am-u-sm-push-12">
+					<button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">提交</button>
+			</div>
+	</div>
+</form>
+
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
+{/block}
