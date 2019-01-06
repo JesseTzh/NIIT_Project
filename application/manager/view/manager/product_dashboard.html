@@ -6,7 +6,7 @@
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="widget am-cf widget-body-lg" style="background: #0a628f">
                     <div class="widget-head am-cf">
-                        <div class="widget-title am-fl">销量top 5</div>
+                        <div class="widget-title am-fl">年度销量top 5</div>
                         <div class="widget-function am-fr">
                             <!--<a href="javascript:;" class="am-icon-cog"></a>-->
                             <i class="am-icon-gear am-icon-spin"></i>
@@ -17,21 +17,22 @@
                         <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black" id="sell_top_five_table">
                             <thead>
                             <tr>
-                                <th>员工ID</th>
-                                <th>员工姓名</th>
-                                <th>月度销售额</th>
+                                <th>产品ID</th>
+                                <th>产品名称</th>
+                                <th>年销售量</th>
                                 <th>点赞</th>
                             </tr>
                             </thead>
                             <tbody>
+                            {volist name='product_top_five' id='pro_top_f'}
                             <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
+                                <td>{$pro_top_f.product_id}</td>
+                                <td>{$pro_top_f.product_name}</td>
+                                <td>{$pro_top_f.total_price}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
                                         <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                            <i class="am-icon-thumbs-o-up"></i> 查看
                                         </a>
                                         <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
                                         <!--<i class="am-icon-trash"></i> 删除-->
@@ -39,66 +40,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
+                            {/volist}
                             <!-- more data -->
                             </tbody>
                         </table>
@@ -117,24 +59,25 @@
                     </div>
                     <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="sell_bottom_five">
                         <!--销量后五的产品表格-->
-                        <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black " id="sell_bottom_five_table">
+                        <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black" id="sell_bottom_five_table">
                             <thead>
                             <tr>
-                                <th>员工ID</th>
-                                <th>员工姓名</th>
-                                <th>月度销售额</th>
+                                <th>产品ID</th>
+                                <th>产品名称</th>
+                                <th>年销售量</th>
                                 <th>点赞</th>
                             </tr>
                             </thead>
                             <tbody>
+                            {volist name='product_bottom_five' id='pro_bot_f'}
                             <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
+                                <td>{$pro_bot_f.product_id}</td>
+                                <td>{$pro_bot_f.product_name}</td>
+                                <td>{$pro_bot_f.total_price}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
                                         <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                            <i class="am-icon-thumbs-o-up"></i> 查看
                                         </a>
                                         <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
                                         <!--<i class="am-icon-trash"></i> 删除-->
@@ -142,66 +85,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
+                            {/volist}
                             <!-- more data -->
                             </tbody>
                         </table>
@@ -224,55 +108,58 @@
                         <!--不同渠道订单量（柱状图）-->
                         <script type="text/javascript">
                             $(document).ready(function(){
-                                var dom = document.getElementById('different_channel_order');
-                                //初始化echart
-                                var chart = echarts.init(dom);
-                                // 制定配置项
-                                var option = {
-                                    tooltip: {
-                                        //鼠标移动显示图例
-                                        trigger: 'axis'
-                                    },
-                                    grid: {
-                                        //绘制
-                                        top: '3%',
-                                        left: '1%',
-                                        right: '1%',
-                                        bottom: '3%',
-                                        containLabel: true
-                                    },
-                                    xAxis: {
-                                        type: 'category',
-                                        data: ['官方商城', '电商自营店', '电商加盟店', '自营实体店', '加盟实体店', '分销商']
-                                    },
-                                    yAxis: {
-                                        type: 'value'
-                                    },
-                                    textStyle: {
-                                        color: '#838FA1'
-                                    },
-                                    series: [{
-                                        name: '订单量',
-                                        data: [100, 200, 50, 1000, 700, 300],
-                                        type: 'bar',
-                                        barMaxWidth: 30,
-                                        barCategoryGap: '10%',
-                                        // itemStyle: {
-                                        //     normal: {
-                                        //         color: '#1cabdb',
-                                        //         borderColor: '#1cabdb',
-                                        //         borderWidth: '2',
-                                        //         borderType: 'solid',
-                                        //         opacity: '1'
-                                        //     },
-                                        //     emphasis: {
-                                        //
-                                        //     }
-                                        // }
-                                    }]
-                                };
-                                //创建图表
-                                chart.setOption(option);
+                                $.post('/index.php/statistics/statistics/comppany_chart', {}, function(res){
+                                    var data = JSON.parse(res)
+                                    var dom = document.getElementById('different_channel_order');
+                                    //初始化echart
+                                    var chart = echarts.init(dom);
+                                    // 制定配置项
+                                    var option = {
+                                        tooltip: {
+                                            //鼠标移动显示图例
+                                            trigger: 'axis'
+                                        },
+                                        grid: {
+                                            //绘制
+                                            top: '3%',
+                                            left: '1%',
+                                            right: '1%',
+                                            bottom: '3%',
+                                            containLabel: true
+                                        },
+                                        xAxis: {
+                                            type: 'category',
+                                            data: ['分销商', '加盟实体店', '官方商城', '电商加盟店', '电商自营店', '自营实体店']
+                                        },
+                                        yAxis: {
+                                            type: 'value'
+                                        },
+                                        textStyle: {
+                                            color: '#838FA1'
+                                        },
+                                        series: [{
+                                            name: '订单量',
+                                            data: data,
+                                            type: 'bar',
+                                            barMaxWidth: 30,
+                                            barCategoryGap: '10%',
+                                            // itemStyle: {
+                                            //     normal: {
+                                            //         color: '#1cabdb',
+                                            //         borderColor: '#1cabdb',
+                                            //         borderWidth: '2',
+                                            //         borderType: 'solid',
+                                            //         opacity: '1'
+                                            //     },
+                                            //     emphasis: {
+                                            //
+                                            //     }
+                                            // }
+                                        }]
+                                    };
+                                    //创建图表
+                                    chart.setOption(option);
+                                })
                             })
                         </script>
                     </div>
@@ -294,83 +181,86 @@
                             <!--不同类型售后处理订单数量-->
                             <script type="text/javascript">
                                 $(document).ready(function(){
-                                    var dom = document.getElementById('different_type_aftersale');
-                                    //初始化echart
-                                    var chart = echarts.init(dom);
-                                    // 制定配置项
-                                    var option = {
-                                        // backgroundColor: '#2c343c',
+                                    $.post('/index.php/statistics/statistics/feedback', {}, function(res){
+                                        var data = JSON.parse(res);
+                                        var dom = document.getElementById('different_type_aftersale');
+                                        //初始化echart
+                                        var chart = echarts.init(dom);
+                                        // 制定配置项
+                                        var option = {
+                                            // backgroundColor: '#2c343c',
 
-                                        grid: {
-                                            //绘制
-                                            top: '3%',
-                                            left: '1%',
-                                            right: '1%',
-                                            bottom: '3%',
-                                            containLabel: true
-                                        },
+                                            grid: {
+                                                //绘制
+                                                top: '3%',
+                                                left: '1%',
+                                                right: '1%',
+                                                bottom: '3%',
+                                                containLabel: true
+                                            },
 
-                                        tooltip : {
-                                            trigger: 'item',
-                                            formatter: "{a} <br/>{b} : {c} ({d}%)"
-                                        },
+                                            tooltip : {
+                                                trigger: 'item',
+                                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                                            },
 
-                                        visualMap: {
-                                            show: false,
-                                            min: 80,
-                                            max: 600,
-                                            inRange: {
-                                                colorLightness: [0, 1]
-                                            }
-                                        },
-                                        series : [
-                                            {
-                                                name:'售后类型',
-                                                type:'pie',
-                                                radius : '55%',
-                                                center: ['50%', '50%'],
-                                                data:[
-                                                    {value:335, name:'退货'},
-                                                    {value:310, name:'换货'},
-                                                    {value:274, name:'免费维修'},
-                                                    {value:235, name:'收费维修'},
-                                                ].sort(function (a, b) { return a.value - b.value; }),
-                                                roseType: 'radius',
-                                                label: {
-                                                    normal: {
-                                                        textStyle: {
-                                                            color: 'rgba(255, 255, 255, 0.3)'
-                                                        }
-                                                    }
-                                                },
-                                                labelLine: {
-                                                    normal: {
-                                                        lineStyle: {
-                                                            color: 'rgba(255, 255, 255, 0.3)'
-                                                        },
-                                                        smooth: 0.2,
-                                                        length: 10,
-                                                        length2: 20
-                                                    }
-                                                },
-                                                itemStyle: {
-                                                    normal: {
-                                                        color: '#c23531',
-                                                        shadowBlur: 200,
-                                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                                    }
-                                                },
-
-                                                animationType: 'scale',
-                                                animationEasing: 'elasticOut',
-                                                animationDelay: function (idx) {
-                                                    return Math.random() * 200;
+                                            visualMap: {
+                                                show: false,
+                                                min: 80,
+                                                max: 600,
+                                                inRange: {
+                                                    colorLightness: [0, 1]
                                                 }
-                                            }
-                                        ]
-                                    };
-                                    //创建图表
-                                    chart.setOption(option);
+                                            },
+                                            series : [
+                                                {
+                                                    name:'售后类型',
+                                                    type:'pie',
+                                                    radius : '55%',
+                                                    center: ['50%', '50%'],
+                                                    data:[
+                                                        {value:data[0]*5, name:'免费维修'},
+                                                        {value:data[1]*5, name:'换货'},
+                                                        {value:data[2]*5, name:'收费维修'},
+                                                        {value:data[3]*5, name:'退货'},
+                                                    ].sort(function (a, b) { return a.value - b.value; }),
+                                                    roseType: 'radius',
+                                                    label: {
+                                                        normal: {
+                                                            textStyle: {
+                                                                color: 'rgba(255, 255, 255, 0.3)'
+                                                            }
+                                                        }
+                                                    },
+                                                    labelLine: {
+                                                        normal: {
+                                                            lineStyle: {
+                                                                color: 'rgba(255, 255, 255, 0.3)'
+                                                            },
+                                                            smooth: 0.2,
+                                                            length: 10,
+                                                            length2: 20
+                                                        }
+                                                    },
+                                                    itemStyle: {
+                                                        normal: {
+                                                            color: '#c23531',
+                                                            shadowBlur: 200,
+                                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                                        }
+                                                    },
+
+                                                    animationType: 'scale',
+                                                    animationEasing: 'elasticOut',
+                                                    animationDelay: function (idx) {
+                                                        return Math.random() * 200;
+                                                    }
+                                                }
+                                            ]
+                                        };
+                                        //创建图表
+                                        chart.setOption(option);
+                                    })
                                 })
                             </script>
                         </div>
@@ -384,32 +274,33 @@
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="widget am-cf widget-body-lg" style="background: #0a628f">
                     <div class="widget-head am-cf">
-                        <div class="widget-title am-fl">销量top 5</div>
+                        <div class="widget-title am-fl">问题产品top 5</div>
                         <div class="widget-function am-fr">
                             <!--<a href="javascript:;" class="am-icon-cog"></a>-->
                             <i class="am-icon-gear am-icon-spin"></i>
                         </div>
                     </div>
                     <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="problem_top_five">
-                        <!--销量前五的产品表格-->
+                        <!--问题产品前五的产品表格-->
                         <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black " id="problem_top_five_table">
                             <thead>
                             <tr>
-                                <th>员工ID</th>
-                                <th>员工姓名</th>
-                                <th>月度销售额</th>
-                                <th>点赞</th>
+                                <th>产品ID</th>
+                                <th>产品名称</th>
+                                <th>年度订单数</th>
+                                <th>查看</th>
                             </tr>
                             </thead>
                             <tbody>
+                            {volist name='problem_product_top_five' id='aaa'}
                             <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
+                                <td>{$aaa.product_id}</td>
+                                <td>{$aaa.produce_name}</td>
+                                <td>{$aaa.order_statistics}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
                                         <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                            <i class="am-icon-thumbs-o-up"></i> 查看
                                         </a>
                                         <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
                                         <!--<i class="am-icon-trash"></i> 删除-->
@@ -417,66 +308,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
+                            {/volist}
                             <!-- more data -->
                             </tbody>
                         </table>
@@ -487,7 +319,7 @@
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="widget am-cf widget-body-lg" style="background: rebeccapurple">
                     <div class="widget-head am-cf">
-                        <div class="widget-title am-fl">销量bottom 5</div>
+                        <div class="widget-title am-fl">问题产品bottom 5</div>
                         <div class="widget-function am-fr">
                             <!--<a href="javascript:;" class="am-icon-cog"></a>-->
                             <i class="am-icon-gear am-icon-spin"></i>
@@ -498,21 +330,22 @@
                         <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black " id="problem_bottom_five_table">
                             <thead>
                             <tr>
-                                <th>员工ID</th>
-                                <th>员工姓名</th>
-                                <th>月度销售额</th>
-                                <th>点赞</th>
+                                <th>产品ID</th>
+                                <th>产品名称</th>
+                                <th>年度订单数</th>
+                                <th>查看</th>
                             </tr>
                             </thead>
                             <tbody>
+                            {volist name='problem_product_bottom_five' id='bbb'}
                             <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
+                                <td>{$bbb.product_id}</td>
+                                <td>{$bbb.produce_name}</td>
+                                <td>{$bbb.order_statistics}</td>
                                 <td>
                                     <div class="tpl-table-black-operation">
                                         <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
+                                            <i class="am-icon-thumbs-o-up"></i> 查看
                                         </a>
                                         <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
                                         <!--<i class="am-icon-trash"></i> 删除-->
@@ -520,66 +353,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="gradeX">
-                                <td>EM00001</td>
-                                <td>Jason</td>
-                                <td>￥1000000+</td>
-                                <td>
-                                    <div class="tpl-table-black-operation">
-                                        <a href="">
-                                            <i class="am-icon-thumbs-o-up"></i> 编辑
-                                        </a>
-                                        <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
-                                        <!--<i class="am-icon-trash"></i> 删除-->
-                                        <!--</a>-->
-                                    </div>
-                                </td>
-                            </tr>
+                            {/volist}
                             <!-- more data -->
                             </tbody>
                         </table>

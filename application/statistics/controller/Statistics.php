@@ -121,7 +121,7 @@ class Statistics extends Controller
         $sql_res = $sql_new->query($sql);
         //dump($sql_res);
 
-        echo json_encode($sql_res);
+        return $sql_res;
     }//月季年目标销售额
 
     static public function department_star_employee()
@@ -152,7 +152,7 @@ class Statistics extends Controller
     {
         $sql_se = \session('employee_department_num');
         $sql_new = new Statistic;
-        $sql = "SELECT a.employee_num,(a.employee_name)as 明星 ,tmp.total from employee a
+        $sql = "SELECT a.employee_num,(a.employee_name)as employee_name ,tmp.total from employee a
         RIGHT JOIN
         (SELECT (order_empolyee_id) AS id,sum(order_total_price) AS total
         from `order`
@@ -165,9 +165,11 @@ class Statistics extends Controller
         ORDER BY total DESC
         LIMIT 5";
         $sql_res = $sql_new->query($sql);
-        //dump($sql_res);
+//        dump($sql_res);
         //会输出一个二维数组，注意是0开始
-        echo json_encode($sql_res,JSON_UNESCAPED_UNICODE);
+//        return json_encode($sql_res,JSON_UNESCAPED_UNICODE);
+        return $sql_res;
+//        return $sql_res;
         //如果是只返回一个数字的话
     }//本部门明星员工top5
     //
@@ -177,7 +179,7 @@ class Statistics extends Controller
     static public function company_product_top5()
     {
         $sql_new = new Statistic;
-        $sql = "SELECT (a.product_name)as 产品名称,tmp.总销售额 from product a
+        $sql = "SELECT (a.product_num)as product_id,(a.product_name)as product_name,(tmp.总销售额) as total_price from product a
         RIGHT JOIN
        (SELECT (order_product_id) AS id,sum(order_total_price) AS 总销售额
         from `order` 
@@ -189,7 +191,8 @@ class Statistics extends Controller
         $sql_res = $sql_new->query($sql);
         //dump($sql_res);
         //会输出一个二维数组，注意是0开始
-        echo json_encode($sql_res, JSON_UNESCAPED_UNICODE);
+//        echo json_encode($sql_res, JSON_UNESCAPED_UNICODE);
+        return $sql_res;
         //如果是只返回一个数字的话
     }//产品销量前五
 
@@ -197,19 +200,20 @@ class Statistics extends Controller
     {
 
         $sql_new = new Statistic;
-        $sql = "SELECT (a.product_name)产品名称,tmp.总销售额 from product a
+        $sql = "SELECT (a.product_num)as product_id,(a.product_name)as product_name,(tmp.总销售额) as total_price from product a
         RIGHT JOIN
        (SELECT (order_product_id) AS id,sum(order_total_price) AS 总销售额
         from `order` 
         GROUP BY order_product_id
         ) tmp 
         ON a.product_num=tmp.id
-        ORDER BY 总销售额 DESC
+        ORDER BY 总销售额 
         LIMIT 5";
         $sql_res = $sql_new->query($sql);
         //dump($sql_res);
         //会输出一个二维数组，注意是0开始
-        echo json_encode($sql_res,JSON_UNESCAPED_UNICODE);
+//        echo json_encode($sql_res,JSON_UNESCAPED_UNICODE);
+        return $sql_res;
 
     }//产品销量后5
 
@@ -272,7 +276,7 @@ class Statistics extends Controller
     {
 
         $sql_new = new Statistic;
-        $sql = "SELECT (a.product_name) as 产品名称,(tmp.total)as 问题订单数
+        $sql = "SELECT (a.product_num)as product_id,(a.product_name) as produce_name,(tmp.total)as order_statistics
         FROM product a
         LEFT JOIN
         (SELECT c.order_product_id,COUNT(*) as total
@@ -287,14 +291,14 @@ class Statistics extends Controller
         LIMIT 5"  ;
         $sql_res = $sql_new->query($sql);
         //dump($res);
-        echo json_encode($sql_res,JSON_UNESCAPED_UNICODE);
-
+//        echo json_encode($sql_res,JSON_UNESCAPED_UNICODE);
+        return $sql_res;
     }//问题产品最多5个
     static public function defective_product_last()
     {
 
         $sql_new = new Statistic;
-        $sql = "SELECT (a.product_name) as 产品名称,ISNULL(tmp.total)as 问题订单数
+        $sql = "SELECT (a.product_num)as product_id,(a.product_name) as produce_name,(tmp.total)as order_statistics
         FROM product a
         LEFT JOIN
         (SELECT c.order_product_id,COUNT(*) as total
@@ -305,11 +309,12 @@ class Statistics extends Controller
         on b.after_sale_order_id =c.order_id 
         GROUP BY c.order_product_id ) tmp
         on a.product_num=tmp.order_product_id
-        ORDER BY total asc
+				where tmp.total is not null
+				ORDER BY tmp.total
         LIMIT 5"  ;
         $sql_res = $sql_new->query($sql);
         //dump($res);
-        echo json_encode($sql_res,JSON_UNESCAPED_UNICODE);
-
+//        echo json_encode($sql_res,JSON_UNESCAPED_UNICODE);
+        return $sql_res;
     }//问题产品最少5个
 }

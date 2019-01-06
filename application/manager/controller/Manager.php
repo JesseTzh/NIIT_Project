@@ -27,11 +27,21 @@ class Manager extends Controller{
             $quart_profit = Statistics::department_quarter_profit();
             $sale_room = Statistics::department_saleroom();
             $star_employee = Statistics::department_star_employee();
-            $top_five_employee = json_decode(Statistics::department_employee_top5());
+            $top_five_employee = Statistics::department_employee_top5();
+            $goal = Statistics::department_goal();
+
+            $monthly_goal = (int)(($goal[0]['total']/$goal[0]['goal'])*100);
+            $quart_goal = (int)(($goal[1]['total']/$goal[1]['goal'])*100);
+            $year_goal = (int)(($goal[2]['total']/$goal[2]['goal'])*100);
+
+
             $this->assign('monthly_profit', $monthly_profit);
             $this->assign('quart_profit', $quart_profit);
             $this->assign('sale_room', $sale_room);
             $this->assign('star_employee', $star_employee);
+            $this->assign('monthly_goal',$monthly_goal);
+            $this->assign('quart_goal',$quart_goal);
+            $this->assign('year_goal',$year_goal);
             $this->assign('top_five_employee', $top_five_employee);
             return $this->fetch('index');
         }
@@ -47,6 +57,14 @@ class Manager extends Controller{
         if(IsLogin::is_login()){
             //已登录
             //显示产品报表页面
+            $product_top_five = Statistics::company_product_top5();
+            $produce_bottom_five = Statistics::company_product_last5();
+            $problem_product_top_five = Statistics::defective_product_top();
+            $problem_product_bottom_five = Statistics::defective_product_last();
+            $this->assign('product_top_five', $product_top_five);
+            $this->assign('product_bottom_five', $produce_bottom_five);
+            $this->assign('problem_product_top_five', $problem_product_top_five);
+            $this->assign('problem_product_bottom_five', $problem_product_bottom_five);
             return $this->fetch('product_dashboard');
         }
         else{

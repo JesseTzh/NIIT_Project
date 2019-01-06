@@ -139,17 +139,17 @@
                     </div>
                     <div class="widget-body widget-body-md am-fr">
 
-                        <div class="am-progress-title">月度目标<span class="am-fr am-progress-title-more">28% / 100%</span></div>
+                        <div class="am-progress-title">月度目标<span class="am-fr am-progress-title-more">{$monthly_goal}% / 100%</span></div>
                         <div class="am-progress">
-                            <div class="am-progress-bar" style="width: 15%"></div>
+                            <div class="am-progress-bar" style="width: {$monthly_goal}%"></div>
                         </div>
-                        <div class="am-progress-title">季度目标<span class="am-fr am-progress-title-more">28% / 100%</span></div>
+                        <div class="am-progress-title">季度目标<span class="am-fr am-progress-title-more">{$quart_goal}% / 100%</span></div>
                         <div class="am-progress">
-                            <div class="am-progress-bar  am-progress-bar-warning" style="width: 75%"></div>
+                            <div class="am-progress-bar  am-progress-bar-warning" style="width: {$quart_goal}%"></div>
                         </div>
-                        <div class="am-progress-title">年度目标<span class="am-fr am-progress-title-more">28% / 100%</span></div>
+                        <div class="am-progress-title">年度目标<span class="am-fr am-progress-title-more">{$year_goal}% / 100%</span></div>
                         <div class="am-progress">
-                            <div class="am-progress-bar am-progress-bar-danger" style="width: 35%"></div>
+                            <div class="am-progress-bar am-progress-bar-danger" style="width: {$year_goal}%"></div>
                         </div>
                     </div>
                 </div>
@@ -194,13 +194,13 @@
                                 <tbody>
                                 {volist name='top_five_employee' id='top'}
                                 <tr class="gradeX">
-                                    <td>{top.employee_num}</td>
-                                    <td>{top.employee_name}</td>
-                                    <td>{top.total}</td>
+                                    <td>{$top.employee_num}</td>
+                                    <td>{$top.employee_name}</td>
+                                    <td>{$top.total}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
                                             <a href="">
-                                                <i class="am-icon-thumbs-o-up"></i> 编辑
+                                                <i class="am-icon-thumbs-o-up"></i> 点赞
                                             </a>
                                             <!--<a href="javascript:;" class="tpl-table-black-operation-del">-->
                                                 <!--<i class="am-icon-trash"></i> 删除-->
