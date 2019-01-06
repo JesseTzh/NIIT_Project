@@ -69,6 +69,10 @@
                         <!--年度销售额折线图-->
                         <script type="text/javascript">
                             $(document).ready(function(){
+                                $.post('/index.php/statistics/statistics/department_sale_chart', {}, function(res){
+                                    var data = JSON.parse(res);
+                                    console.log(data);
+                                })
                                 var dom = document.getElementById('total_sell_for_year');
                                 //初始化echart
                                 var chart = echarts.init(dom);
