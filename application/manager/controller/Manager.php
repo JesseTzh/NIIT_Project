@@ -26,9 +26,13 @@ class Manager extends Controller{
             $monthly_profit = Statistics::department_monthly_profit();
             $quart_profit = Statistics::department_quarter_profit();
             $sale_room = Statistics::department_saleroom();
+            $star_employee = Statistics::department_star_employee();
+            $top_five_employee = json_decode(Statistics::department_employee_top5());
             $this->assign('monthly_profit', $monthly_profit);
             $this->assign('quart_profit', $quart_profit);
             $this->assign('sale_room', $sale_room);
+            $this->assign('star_employee', $star_employee);
+            $this->assign('top_five_employee', $top_five_employee);
             return $this->fetch('index');
         }
         else{

@@ -129,7 +129,7 @@ class Statistics extends Controller
             $res[$i][$y] = $sql_res[$i]["goal"];
         }
         //dump($res);
-        return json($res);
+        return json_encode($res);
 
     }//月季年目标销售额
     static public function department_star_employee()

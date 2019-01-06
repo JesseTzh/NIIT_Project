@@ -71,58 +71,57 @@
                             $(document).ready(function(){
                                 $.post('/index.php/statistics/statistics/department_sale_chart', {}, function(res){
                                     var data = JSON.parse(res);
-                                    console.log(data);
-                                })
-                                var dom = document.getElementById('total_sell_for_year');
-                                //初始化echart
-                                var chart = echarts.init(dom);
-                                //制定配置项
-                                var option = {
-                                    tooltip: {
-                                        //鼠标移动显示图例
-                                        trigger: 'axis'
-                                    },
-                                    grid: {
-                                        //绘制
-                                        top: '3%',
-                                        left: '3%',
-                                        right: '4%',
-                                        bottom: '3%',
-                                        containLabel: true
-                                    },
-                                    xAxis: {
-                                        type: 'category',
-                                        boundaryGap: false,
-                                        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                                    },
-                                    yAxis: {
-                                        type: 'value'
-                                    },
-                                    textStyle: {
-                                        color: '#838FA1'
-                                    },
-                                    series: [{
-                                        name: '年度销售总额',
-                                        data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                                        type: 'line',
-                                        areaStyle: {normal: {}},
-                                        itemStyle: {
-                                            normal: {
-                                                color: '#1cabdb',
-                                                borderColor: '#1cabdb',
-                                                borderWidth: '2',
-                                                borderType: 'solid',
-                                                opacity: '1'
-                                            },
-                                            emphasis: {
+                                    var dom = document.getElementById('total_sell_for_year');
+                                    //初始化echart
+                                    var chart = echarts.init(dom);
+                                    //制定配置项
+                                    var option = {
+                                        tooltip: {
+                                            //鼠标移动显示图例
+                                            trigger: 'axis'
+                                        },
+                                        grid: {
+                                            //绘制
+                                            top: '3%',
+                                            left: '3%',
+                                            right: '4%',
+                                            bottom: '3%',
+                                            containLabel: true
+                                        },
+                                        xAxis: {
+                                            type: 'category',
+                                            boundaryGap: false,
+                                            data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                                        },
+                                        yAxis: {
+                                            type: 'value'
+                                        },
+                                        textStyle: {
+                                            color: '#838FA1'
+                                        },
+                                        series: [{
+                                            name: '月度销售总额',
+                                            data: data,
+                                            type: 'line',
+                                            areaStyle: {normal: {}},
+                                            itemStyle: {
+                                                normal: {
+                                                    color: '#1cabdb',
+                                                    borderColor: '#1cabdb',
+                                                    borderWidth: '2',
+                                                    borderType: 'solid',
+                                                    opacity: '1'
+                                                },
+                                                emphasis: {
 
+                                                }
                                             }
-                                        }
-                                    }]
-                                };
+                                        }]
+                                    };
 
-                                //创建图表
-                                chart.setOption(option);
+                                    //创建图表
+                                    chart.setOption(option);
+                                })
                             })
                         </script>
                     </div>
@@ -170,9 +169,9 @@
                     <img class="achievement-image" src="/static/images/faces/face1.jpg" alt="">
                     <br><br><br>
                     <div class="achievement-description">
-                        Jason 在
-                        <strong>30天内</strong> 销售额高达
-                        <strong>100</strong>万。
+                        {$star_employee} 在
+                        <strong>30天内</strong> 销售额排名
+                        <strong>No.1</strong>。
                     </div>
                 </div>
             </div>
@@ -188,15 +187,16 @@
                                 <tr>
                                     <th>员工ID</th>
                                     <th>员工姓名</th>
-                                    <th>月度销售额</th>
+                                    <th>年度销售额</th>
                                     <th>点赞</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {volist name='top_five_employee' id='top'}
                                 <tr class="gradeX">
-                                    <td>EM00001</td>
-                                    <td>Jason</td>
-                                    <td>￥1000000+</td>
+                                    <td>{top.employee_num}</td>
+                                    <td>{top.employee_name}</td>
+                                    <td>{top.total}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
                                             <a href="">
@@ -208,6 +208,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                {/volist}
                                 <!-- more data -->
                                 </tbody>
                             </table>
