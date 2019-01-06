@@ -93,8 +93,7 @@ class Statistics extends Controller
         //dump($sql_res);
         //会输出一个二维数组，注意是0开始
         for ($i=0;$i<=11;$i++) {
-            $y=$sql_res[$i][$i+1];
-            $res[$i][$y] = $sql_res[$i]["total_price"];
+            $res[$i] = $sql_res[$i]["total_price"];
         }
         //dump($res);
         echo json_encode($res);
